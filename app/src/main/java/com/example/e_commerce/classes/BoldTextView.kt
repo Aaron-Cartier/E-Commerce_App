@@ -1,4 +1,4 @@
-package com.example.e_commerce
+package com.example.e_commerce.classes
 
 import android.content.Context
 import android.graphics.Typeface
