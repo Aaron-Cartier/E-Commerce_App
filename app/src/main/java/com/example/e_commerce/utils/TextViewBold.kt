@@ -5,7 +5,7 @@ import android.graphics.Typeface
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
 
-class MSPTextViewBold(context: Context, attributeSet: AttributeSet) : AppCompatEditText(context, attributeSet){
+class TextViewBold(context: Context, attributeSet: AttributeSet) : AppCompatEditText(context, attributeSet){
     init {
         applyFont()
     }
