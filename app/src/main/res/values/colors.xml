@@ -4,6 +4,13 @@
     <color name="colorPrimaryDark">#222934</color>
     <color name="colorAccent">#ED2173</color>
 
+    <color name="colorThemePink">#ED2173</color>
+    <color name="colorThemeOrange">#F4442D</color>
+
+    <color name="colorPrimaryText">#222934</color>
+    <color name="colorSecondaryText">#989898</color>
+
+
     <color name="colorWhite">#FFFFFF</color>
 
 </resources>

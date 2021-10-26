@@ -13,7 +13,7 @@ class TextViewBold(context: Context, attributeSet: AttributeSet) : AppCompatEdit
     private fun applyFont() {
         //This is used to get the file from assets folder and set it to the title textView.
         val typeFace: Typeface = Typeface.createFromAsset(context.assets, "Montserrat-Bold.ttf")
-        setTypeface(typeFace)
+        typeface = typeFace
     }
 
 
