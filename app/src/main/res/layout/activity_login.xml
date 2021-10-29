@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
         android:text="@string/title_login"
+        android:enabled="false"
         android:textColor="@color/colorPrimaryText"
         android:textSize="@dimen/title_textSize"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +58,7 @@
             android:padding="@dimen/et_padding"
             android:textColor="@color/colorPrimaryText"
             android:textSize="@dimen/et_textSize"
-            android:text="abc@gmail.com" />
+            android:text="@string/abc_gmail_com" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -82,7 +83,7 @@
             android:padding="@dimen/et_padding"
             android:textColor="@color/colorPrimaryText"
             android:textSize="@dimen/et_textSize"
-            android:text="12345" />
+            android:text="@string/_12345" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.example.e_commerce.utils.TextView
@@ -93,6 +94,7 @@
         android:foreground="?attr/selectableItemBackground"
         android:padding="@dimen/clickable_text_view_padding"
         android:text="@string/lbl_forgot_password"
+        android:editable="false"
         android:textColor="@color/colorSecondaryText"
         android:textSize="@dimen/forgot_password_textSize"
         app:layout_constraintEnd_toEndOf="parent"
@@ -135,6 +137,7 @@
             android:layout_marginTop="16dp"
             android:padding="@dimen/clickable_text_view_padding"
             android:text="@string/do_not_have_an_account"
+            android:editable="false"
             android:textSize="@dimen/lbl_text_view_textSize"
             android:textColor="@color/colorSecondaryText" />
 
@@ -146,6 +149,7 @@
             android:foreground="?attr/selectableItemBackground"
             android:padding="@dimen/clickable_text_view_padding"
             android:text="@string/register"
+            android:editable="false"
             android:textColor="@color/colorSecondaryText"
             android:textSize="@dimen/lbl_text_view_textSize" />
     </LinearLayout>

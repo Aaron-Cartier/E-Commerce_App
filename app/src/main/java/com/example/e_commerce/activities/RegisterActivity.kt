@@ -8,11 +8,12 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import com.example.e_commerce.R
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_register.*
 
-class LoginActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_register)
 
         @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -24,13 +25,11 @@ class LoginActivity : AppCompatActivity() {
             )
         }
 
-        tv_register.setOnClickListener {
+        tv_login.setOnClickListener {
             //Launches the register screen when the user clicks on the text
-            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }
-
-
     }
 }
