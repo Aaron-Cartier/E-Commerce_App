@@ -13,7 +13,7 @@ class EditText(context: Context, attributeSet: AttributeSet) : AppCompatEditText
 
     private fun applyFont(){
         //this is used to get the file from the assets folder
-        val boldTypeface: Typeface = Typeface.createFromAsset(context.assets, "Montserrat-Bold.ttf")
+        val boldTypeface: Typeface = Typeface.createFromAsset(context.assets, "Montserrat-Regular.ttf")
         typeface = boldTypeface
     }
 }
