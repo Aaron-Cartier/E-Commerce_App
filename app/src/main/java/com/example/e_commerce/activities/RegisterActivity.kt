@@ -10,7 +10,7 @@ import com.example.e_commerce.R
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -44,4 +44,5 @@ class RegisterActivity : AppCompatActivity() {
 
         toolbar_register_activity.setNavigationOnClickListener {onBackPressed()}
     }
+
 }
