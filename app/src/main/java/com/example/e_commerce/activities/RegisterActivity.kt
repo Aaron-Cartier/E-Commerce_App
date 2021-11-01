@@ -25,11 +25,23 @@ class RegisterActivity : AppCompatActivity() {
             )
         }
 
+        setupActionBar()
+
         tv_login.setOnClickListener {
             //Launches the register screen when the user clicks on the text
             val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
             startActivity(intent)
-            finish()
         }
+    }
+    private fun setupActionBar() {
+        setSupportActionBar(toolbar_register_activity)
+
+        val actionBar = supportActionBar
+        if(actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true)
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24dp)
+        }
+
+        toolbar_register_activity.setNavigationOnClickListener {onBackPressed()}
     }
 }
