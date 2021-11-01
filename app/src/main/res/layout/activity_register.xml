@@ -126,7 +126,7 @@
                 app:layout_constraintTop_toBottomOf="@id/til_email">
 
                 <com.example.e_commerce.utils.EditText
-                    android:id="@+id/et_password"
+                    android:id="@+id/et_passwordR"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
