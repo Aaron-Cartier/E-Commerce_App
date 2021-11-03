@@ -8,6 +8,11 @@ import android.text.TextUtils
 import android.view.WindowInsets
 import android.view.WindowManager
 import com.example.e_commerce.R
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -93,6 +98,28 @@ class RegisterActivity : BaseActivity() {
                 showErrorSnackBar("Your details are valid", false)
                 true
             }
+        }
+    }
+
+    private fun registerUser() {
+        if(validateRegisterDetails()) {
+            val email: String = et_email.text.toString().trim {it <= ' '}
+            val password: String = et_passwordR.text.toString().trim {it <= ' '}
+
+            //create an instance and create a register a user with email and password
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(OnCompleteListener<AuthResult> { task ->
+
+                    //if the registration is successfully done
+                    if(task.isSuccessful) {
+                        //firebase registered user
+                        val firebaseUser: FirebaseUser = task.result!!.user!!
+                        showErrorSnackBar("You have successfully registered. Your user id is ${firebaseUser.uid}", false)
+                    }else{
+                        //if the registering is not success then shows error message
+                        showErrorSnackBar(task.exception!!.message.toString(), true)
+                    }
+                })
         }
     }
 }
