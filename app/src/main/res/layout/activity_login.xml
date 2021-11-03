@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     tools:context=".activities.LoginActivity">
-    
+
     <FrameLayout
         android:id="@+id/fl_header_image"
         android:layout_width="wrap_content"
@@ -20,22 +21,20 @@
             android:contentDescription="@string/content_description"
             android:scaleType="fitXY"
             android:src="@drawable/auth_screen_background" />
-
     </FrameLayout>
 
-    <com.example.e_commerce.classes.BoldTextView
+    <com.example.e_commerce.utils.TextViewBold
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
         android:text="@string/title_login"
-        android:enabled="false"
         android:textColor="@color/colorPrimaryText"
         android:textSize="@dimen/title_textSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fl_header_image" />
-    
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_email"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -48,17 +47,17 @@
         android:textColorHint="@color/colorSecondaryText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" >
+        app:layout_constraintTop_toBottomOf="@id/tv_title">
 
         <com.example.e_commerce.utils.EditText
-            android:id="@+id/et_mail"
+            android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:padding="@dimen/et_padding"
             android:textColor="@color/colorPrimaryText"
             android:textSize="@dimen/et_textSize"
-            android:text="@string/abc_gmail_com" />
+            tools:text="abc@gmail.com" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -73,9 +72,9 @@
         android:textColorHint="@color/colorSecondaryText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_email" >
+        app:layout_constraintTop_toBottomOf="@id/til_email">
 
-        <com.example.e_commerce.utils.EditText
+        <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -83,7 +82,7 @@
             android:padding="@dimen/et_padding"
             android:textColor="@color/colorPrimaryText"
             android:textSize="@dimen/et_textSize"
-            android:text="@string/_12345" />
+            tools:text="123456" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.example.e_commerce.utils.TextView
@@ -94,7 +93,6 @@
         android:foreground="?attr/selectableItemBackground"
         android:padding="@dimen/clickable_text_view_padding"
         android:text="@string/lbl_forgot_password"
-        android:editable="false"
         android:textColor="@color/colorSecondaryText"
         android:textSize="@dimen/forgot_password_textSize"
         app:layout_constraintEnd_toEndOf="parent"
@@ -118,38 +116,34 @@
         android:textSize="@dimen/btn_textSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_forgot_password" />
-    
+        app:layout_constraintTop_toBottomOf="@id/tv_forgot_password" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="25dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" >
+        app:layout_constraintTop_toBottomOf="@id/btn_login">
 
         <com.example.e_commerce.utils.TextView
-            android:id="@+id/tv_do_not_have_an_account"
+            android:id="@+id/tv_don_t_have_an_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:padding="@dimen/clickable_text_view_padding"
             android:text="@string/do_not_have_an_account"
-            android:editable="false"
-            android:textSize="@dimen/lbl_text_view_textSize"
-            android:textColor="@color/colorSecondaryText" />
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="@dimen/lbl_text_view_textSize" />
 
         <com.example.e_commerce.utils.TextViewBold
             android:id="@+id/tv_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:foreground="?attr/selectableItemBackground"
             android:padding="@dimen/clickable_text_view_padding"
             android:text="@string/register"
-            android:editable="false"
             android:textColor="@color/colorSecondaryText"
             android:textSize="@dimen/lbl_text_view_textSize" />
     </LinearLayout>

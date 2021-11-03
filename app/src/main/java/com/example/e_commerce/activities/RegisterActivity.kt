@@ -40,7 +40,7 @@ class RegisterActivity : BaseActivity() {
         }
 
         btn_register.setOnClickListener{
-            validateRegisterDetails()
+            registerUser()
         }
     }
     private fun setupActionBar() {
@@ -70,7 +70,7 @@ class RegisterActivity : BaseActivity() {
                 false
             }
 
-            TextUtils.isEmpty(et_email.text.toString().trim {it <= ' '}) -> {
+            TextUtils.isEmpty(et_emailR.text.toString().trim {it <= ' '}) -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_email), true)
                 false
             }
@@ -95,7 +95,7 @@ class RegisterActivity : BaseActivity() {
                 false
             }
             else -> {
-                showErrorSnackBar("Your details are valid", false)
+                //showErrorSnackBar("Your details are valid", false)
                 true
             }
         }
@@ -103,7 +103,7 @@ class RegisterActivity : BaseActivity() {
 
     private fun registerUser() {
         if(validateRegisterDetails()) {
-            val email: String = et_email.text.toString().trim {it <= ' '}
+            val email: String = et_emailR.text.toString().trim {it <= ' '}
             val password: String = et_passwordR.text.toString().trim {it <= ' '}
 
             //create an instance and create a register a user with email and password
