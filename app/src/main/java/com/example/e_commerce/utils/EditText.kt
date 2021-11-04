@@ -15,5 +15,6 @@ class EditText(context: Context, attributeSet: AttributeSet) : AppCompatEditText
         //this is used to get the file from the assets folder
         val boldTypeface: Typeface = Typeface.createFromAsset(context.assets, "Montserrat-Regular.ttf")
         typeface = typeface
+        isFocusable = false
     }
 }

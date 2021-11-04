@@ -30,6 +30,7 @@
         android:layout_marginTop="35dp"
         android:text="@string/title_login"
         android:textColor="@color/colorPrimaryText"
+        android:background="@color/colorWhite"
         android:textSize="@dimen/title_textSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +75,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_email">
 
-        <EditText
+        <com.example.e_commerce.utils.EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -82,7 +83,8 @@
             android:padding="@dimen/et_padding"
             android:textColor="@color/colorPrimaryText"
             android:textSize="@dimen/et_textSize"
-            tools:text="123456" />
+            tools:text="123456"
+            android:autofillHints="" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.example.e_commerce.utils.TextView
@@ -94,6 +96,7 @@
         android:padding="@dimen/clickable_text_view_padding"
         android:text="@string/lbl_forgot_password"
         android:textColor="@color/colorSecondaryText"
+        android:background="@color/colorWhite"
         android:textSize="@dimen/forgot_password_textSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_password" />
@@ -135,6 +138,7 @@
             android:padding="@dimen/clickable_text_view_padding"
             android:text="@string/do_not_have_an_account"
             android:textColor="@color/colorSecondaryText"
+            android:background="@color/colorWhite"
             android:textSize="@dimen/lbl_text_view_textSize" />
 
         <com.example.e_commerce.utils.TextViewBold
@@ -145,6 +149,7 @@
             android:padding="@dimen/clickable_text_view_padding"
             android:text="@string/register"
             android:textColor="@color/colorSecondaryText"
+            android:background="@color/colorWhite"
             android:textSize="@dimen/lbl_text_view_textSize" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
