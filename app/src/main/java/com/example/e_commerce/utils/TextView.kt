@@ -14,5 +14,6 @@ class TextView(context: Context, attributeSet: AttributeSet) : AppCompatEditText
         //This is used to get the file from assets folder and set it to the title textView.
         val typeFace: Typeface = Typeface.createFromAsset(context.assets, "Montserrat-Regular.ttf")
         typeface = typeFace
+        isFocusable = false
     }
 }
