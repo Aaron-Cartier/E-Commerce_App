@@ -22,7 +22,7 @@
     <string name="i_agree_to_the_terms_and_conditions">I agree to the <u> Terms &amp; Conditions </u></string>
     <string name="btn_lbl_register">Register</string>
 
-    <string name="already_have_an_account">Already have an account</string>
+    <string name="already_have_an_account">Already have an account?</string>
     <string name="login"><u>Login</u></string>
 
     <string name="err_msg_enter_first_name">Please enter first name.</string>
@@ -32,5 +32,8 @@
     <string name="err_msg_enter_confirm_password">Please confirm password.</string>
     <string name="err_msg_password_and_confirm_password_mismatch">Password and confirm password do not match.</string>
     <string name="err_msg_agree_terms_and_condition">Please agree to the terms and conditions.</string>
+    <string name="registry_successful">Thank you, user registered.</string>
+
+    <string name="please_wait">Please wait&#8230;</string>
 
 </resources>

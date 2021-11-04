@@ -103,12 +103,17 @@ class RegisterActivity : BaseActivity() {
 
     private fun registerUser() {
         if(validateRegisterDetails()) {
+
+            showProgressDialog(resources.getString(R.string.please_wait))
+
             val email: String = et_emailR.text.toString().trim {it <= ' '}
             val password: String = et_passwordR.text.toString().trim {it <= ' '}
 
             //create an instance and create a register a user with email and password
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(OnCompleteListener<AuthResult> { task ->
+
+                    hideProgressDialog()
 
                     //if the registration is successfully done
                     if(task.isSuccessful) {
