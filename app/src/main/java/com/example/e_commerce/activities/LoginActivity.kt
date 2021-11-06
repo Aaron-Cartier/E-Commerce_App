@@ -48,7 +48,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         if(view != null) {
             when(view.id) {
                 R.id.tv_forgot_password -> {
-
+                    //Launches the forgot password screen when the user clicks on the text
+                    val intent = Intent(this@LoginActivity, ForgotPasswordActivity::class.java)
+                    startActivity(intent)
                 }
 
                 R.id.btn_login -> {
@@ -56,7 +58,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 }
 
                 R.id.tv_register -> {
-                    //Laugh the register screen when the user clicks on the text
+                    //Launches the register screen when the user clicks on the text
                     val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
                     startActivity(intent)
                 }
