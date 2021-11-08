@@ -4,6 +4,8 @@ import android.app.Dialog
 import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.Message
 import androidx.core.content.ContextCompat
 import com.example.e_commerce.R
@@ -13,6 +15,7 @@ import kotlinx.android.synthetic.main.dialog_progress.*
 open class BaseActivity : AppCompatActivity() {
 
     private lateinit var mProgressDialog: Dialog
+
 
     fun showErrorSnackBar(message: String, errorMessage: Boolean) {
         val snackBar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
@@ -24,6 +27,10 @@ open class BaseActivity : AppCompatActivity() {
             snackBarView.setBackgroundColor(ContextCompat.getColor(this@BaseActivity, R.color.colorSnackBarSuccess))
         }
         snackBar.show()
+
+//        Handler().postDelayed({
+//                              snackBar.show()
+//        },500)
     }
 
     fun showProgressDialog(text: String) {

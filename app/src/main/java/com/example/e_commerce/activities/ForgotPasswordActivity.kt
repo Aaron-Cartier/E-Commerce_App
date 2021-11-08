@@ -40,7 +40,7 @@ class ForgotPasswordActivity : BaseActivity() {
                         hideProgressDialog()
                         if(task.isSuccessful) {
                             //show message and finish the forgot password activity to go back to the login screen activity
-                              //showErrorSnackBar(resources.getString(R.string.email_sent_success), false)
+                            //showErrorSnackBar(resources.getString(R.string.email_sent_success), false)
                             Toast.makeText(
                                 this@ForgotPasswordActivity,
                                 resources.getString(R.string.email_sent_success),
