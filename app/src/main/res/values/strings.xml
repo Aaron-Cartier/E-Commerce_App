@@ -41,5 +41,6 @@
     <string name="btn_lbl_submit">Submit</string>
 
     <string name="email_sent_success">Password reset email sent!</string>
+    <string name="register_success">You have registered successfully!</string>
 
 </resources>

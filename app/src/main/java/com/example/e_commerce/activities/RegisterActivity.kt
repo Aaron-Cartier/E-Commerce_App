@@ -7,7 +7,10 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
 import com.example.e_commerce.R
+import com.example.e_commerce.firestore.FireStoreClass
+import com.example.e_commerce.models.User
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -111,21 +114,39 @@ class RegisterActivity : BaseActivity() {
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(OnCompleteListener<AuthResult> { task ->
 
-                    hideProgressDialog()
-
                     //if the registration is successfully done
                     if(task.isSuccessful) {
                         //firebase registered user
                         val firebaseUser: FirebaseUser = task.result!!.user!!
-                        showErrorSnackBar("You have successfully registered. Your user id is ${firebaseUser.uid}", false)
 
-                        FirebaseAuth.getInstance().signOut();
-                        finish()
+                        val user = User(
+                            firebaseUser.uid,
+                            et_first_name.text.toString().trim {it <= ' '},
+                            et_last_name.text.toString().trim {it <= ' '},
+                            et_emailR.text.toString().trim() {it <= ' '}
+                        )
+
+                        FireStoreClass().registerUser(this@RegisterActivity, user)
+
+                        //FirebaseAuth.getInstance().signOut();
+                        //finish()
                     }else{
+                        hideProgressDialog()
                         //if the registering is not success then shows error message
                         showErrorSnackBar(task.exception!!.message.toString(), true)
                     }
                 })
         }
+    }
+
+    fun userRegistrationSuccess() {
+        //Hide the progress dialog
+        hideProgressDialog()
+
+        Toast.makeText(
+            this@RegisterActivity,
+            resources.getString(R.string.register_success),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }
