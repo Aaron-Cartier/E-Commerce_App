@@ -5,11 +5,15 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import com.example.e_commerce.R
+import com.example.e_commerce.firestore.FireStoreClass
+import com.example.e_commerce.models.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.core.FirestoreClient
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -94,16 +98,28 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             //log in using FirebaseAuth
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
-                    //hide the progress dialog
-                    hideProgressDialog()
 
                     if(task.isSuccessful) {
-                        //TODO - send user to main activity
-                        showErrorSnackBar("You are now logged in", false)
+                        FireStoreClass().getUserDetails(this@LoginActivity)
                     }else{
+                        hideProgressDialog()
                         showErrorSnackBar(task.exception!!.message.toString(), true)
                     }
                 }
         }
+    }
+
+    fun userLoggedInSuccess(user: User) {
+        //hide the progress dialog
+        hideProgressDialog()
+
+        //print the user details in the log as of now
+        Log.i("First name: ", user.firstName)
+        Log.i("Last name: ", user.lastName)
+        Log.i("Email: ", user.email)
+
+        //redirect the user to main screen after log in
+        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        finish()
     }
 }

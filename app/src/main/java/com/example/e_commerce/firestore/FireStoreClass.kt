@@ -1,6 +1,8 @@
 package com.example.e_commerce.firestore
 
+import android.app.Activity
 import android.util.Log
+import com.example.e_commerce.activities.LoginActivity
 import com.example.e_commerce.activities.RegisterActivity
 import com.example.e_commerce.models.User
 import com.example.e_commerce.utils.Constants
@@ -42,5 +44,35 @@ class FireStoreClass {
             currentUserId = currentUser.uid
         }
         return currentUserId
+    }
+
+    fun getUserDetails(activity: Activity) {
+        //here we pass the collection name from which we want the data
+        mFireStore.collection(Constants.USERS)
+            //The Document ID is to get the fields of user
+            .document(getCurrentUserId())
+            .get()
+            .addOnSuccessListener { document ->
+                Log.i(activity.javaClass.simpleName, document.toString())
+
+                //Here we have received the document snapshot which is converted in to the user data model object
+                val user = document.toObject(User::class.java)!!
+
+                when(activity) {
+                    is LoginActivity -> {
+                        //call a function of base activity for transferring the result to it
+                        activity.userLoggedInSuccess(user)
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                //hide the progress dialog if there is any error, and print the error in log
+                when(activity) {
+                    is LoginActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                }
+                Log.e(activity.javaClass.simpleName, e.toString())
+            }
     }
 }
