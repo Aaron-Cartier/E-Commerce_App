@@ -1,6 +1,8 @@
 package com.example.e_commerce.firestore
 
 import android.app.Activity
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import com.example.e_commerce.activities.LoginActivity
 import com.example.e_commerce.activities.RegisterActivity
@@ -57,6 +59,17 @@ class FireStoreClass {
 
                 //Here we have received the document snapshot which is converted in to the user data model object
                 val user = document.toObject(User::class.java)!!
+
+                val sharedPreferences = activity.getSharedPreferences(Constants.E_COMMERCE_PREFERENCES, Context.MODE_PRIVATE)
+
+                val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                //key = logged_in_username
+                //value = first name and last name
+                editor.putString(
+                    Constants.LOGGED_IN_USERNAME,
+                    "${user.firstName} ${user.lastName}"
+                )
+                editor.apply()
 
                 when(activity) {
                     is LoginActivity -> {
