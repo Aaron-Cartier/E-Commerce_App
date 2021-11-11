@@ -118,8 +118,14 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         Log.i("Last name: ", user.lastName)
         Log.i("Email: ", user.email)
 
-        //redirect the user to main screen after log in
-        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        if(user.profileCompleted == 0) {
+            //if the user profile is incomplete, then launch the UserProfileActivity
+            val intent = Intent(this@LoginActivity, UserProfileActivity::class.java)
+            startActivity(intent)
+        }else{
+            //redirect the user to the main screen after log in
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        }
         finish()
     }
 }
