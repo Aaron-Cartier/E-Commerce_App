@@ -12,6 +12,7 @@ import android.view.WindowManager
 import com.example.e_commerce.R
 import com.example.e_commerce.firestore.FireStoreClass
 import com.example.e_commerce.models.User
+import com.example.e_commerce.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.core.FirestoreClient
 import kotlinx.android.synthetic.main.activity_login.*
@@ -121,6 +122,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         if(user.profileCompleted == 0) {
             //if the user profile is incomplete, then launch the UserProfileActivity
             val intent = Intent(this@LoginActivity, UserProfileActivity::class.java)
+            intent.putExtra(Constants.EXTRA_USER_DETAILS, user)
             startActivity(intent)
         }else{
             //redirect the user to the main screen after log in
