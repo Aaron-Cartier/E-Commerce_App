@@ -51,4 +51,6 @@
 
     <string name="read_storage_permission_denied">You have denied permission for storage. You can allow permission from settings.</string>
 
+    <string name="image_selection_failed">Image selection failed!</string>
+
 </resources>

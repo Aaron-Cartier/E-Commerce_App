@@ -1,7 +1,10 @@
 package com.example.e_commerce.activities
 
 import android.Manifest
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -12,6 +15,7 @@ import com.example.e_commerce.R
 import com.example.e_commerce.models.User
 import com.example.e_commerce.utils.Constants
 import kotlinx.android.synthetic.main.activity_user_profile.*
+import java.io.IOException
 
 class UserProfileActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,17 +51,19 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                             Manifest.permission.READ_EXTERNAL_STORAGE
                         ) == PackageManager.PERMISSION_GRANTED
                     )
-                    {showErrorSnackBar("You already have the storage permission.", false)
-                    }else{
-                        /*Requests permissions to be granted to this application. These permissions
-                         must be requested in your manifest, they should not be granted to your app,
-                         and they should have protection level*/
+                        {
+                            //showErrorSnackBar("You already have the storage permission.", false)
+                            Constants.showImageChooser(this)
+                        }else{
+                            /*Requests permissions to be granted to this application. These permissions
+                             must be requested in your manifest, they should not be granted to your app,
+                             and they should have protection level*/
 
-                        ActivityCompat.requestPermissions(
-                            this,
-                            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                            Constants.READ_STORAGE_PERMISSION_CODE
-                        )
+                            ActivityCompat.requestPermissions(
+                                this,
+                                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                                Constants.READ_STORAGE_PERMISSION_CODE
+                            )
                     }
                 }
             }
@@ -78,6 +84,26 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                     //displaying another toast if persmission is not granted
                 Toast.makeText(this, resources.getString(R.string.read_storage_permission_denied), Toast.LENGTH_LONG).show()
                 }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK) {
+            if(requestCode == Constants.PICK_IMAGE_REQUEST_CODE) {
+                if(data != null) {
+                    try {
+                        //the uri of selected image from phone storage
+                        val selectedImageFileUri = data.data!!
+
+                        iv_user_photo.setImageURI(selectedImageFileUri)
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                        Toast.makeText(this@UserProfileActivity, resources.getString(R.string.image_selection_failed),
+                        Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
     }
 }
