@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import com.example.e_commerce.R
 import com.example.e_commerce.models.User
 import com.example.e_commerce.utils.Constants
+import com.example.e_commerce.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_user_profile.*
 import java.io.IOException
 
@@ -96,7 +97,8 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                         //the uri of selected image from phone storage
                         val selectedImageFileUri = data.data!!
 
-                        iv_user_photo.setImageURI(selectedImageFileUri)
+                        //iv_user_photo.setImageURI(selectedImageFileUri)
+                        GlideLoader(this).loadUserPicture(selectedImageFileUri,iv_user_photo)
                     } catch (e: IOException) {
                         e.printStackTrace()
                         Toast.makeText(this@UserProfileActivity, resources.getString(R.string.image_selection_failed),
