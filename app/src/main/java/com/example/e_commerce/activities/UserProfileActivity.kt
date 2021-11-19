@@ -7,6 +7,8 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -39,6 +41,8 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
         et_email.setText(userDetails.email)
 
         iv_user_photo.setOnClickListener(this@UserProfileActivity)
+
+        btn_save.setOnClickListener(this@UserProfileActivity)
     }
 
     override fun onClick(v: View?) {
@@ -67,6 +71,12 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                             )
                     }
                 }
+
+                R.id.btn_save -> {
+                    if(validateUserProfileDetails()) {
+                        showErrorSnackBar("Your details are valid. You can update them.", false)
+                    }
+                }
             }
         }
     }
@@ -82,7 +92,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
             if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     showErrorSnackBar("The storage permission is grant", false)
                 }else{
-                    //displaying another toast if persmission is not granted
+                    //displaying another toast if permission is not granted
                 Toast.makeText(this, resources.getString(R.string.read_storage_permission_denied), Toast.LENGTH_LONG).show()
                 }
         }
@@ -105,6 +115,20 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                         Toast.LENGTH_SHORT).show()
                     }
                 }
+            }else if(resultCode == Activity.RESULT_CANCELED) {
+                //A log is printed when user closes or cancels the image selection
+                Log.e("Request cancelled", "Image selection cancelled")
+            }
+        }
+    }
+
+    private fun validateUserProfileDetails(): Boolean {
+        return when {
+            TextUtils.isEmpty(et_mobile_number.text.toString().trim { it <= ' '}) -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_mobile_number), true)
+                false
+            }else -> {
+                true
             }
         }
     }
