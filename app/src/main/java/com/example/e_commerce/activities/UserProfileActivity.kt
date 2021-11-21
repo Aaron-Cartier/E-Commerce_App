@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.e_commerce.R
+import com.example.e_commerce.firestore.FireStoreClass
 import com.example.e_commerce.models.User
 import com.example.e_commerce.utils.Constants
 import com.example.e_commerce.utils.GlideLoader
@@ -21,24 +22,26 @@ import kotlinx.android.synthetic.main.activity_user_profile.*
 import java.io.IOException
 
 class UserProfileActivity : BaseActivity(), View.OnClickListener {
+
+    private lateinit var mUserDeails: User
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
 
-        var userDetails: User = User()
         if(intent.hasExtra(Constants.EXTRA_USER_DETAILS)) {
             //get the user details from intent as a ParcelableExtra
-            userDetails = intent.getParcelableExtra(Constants.EXTRA_USER_DETAILS)!!
+            mUserDeails = intent.getParcelableExtra(Constants.EXTRA_USER_DETAILS)!!
         }
 
         et_first_name.isEnabled = false
-        et_first_name.setText(userDetails.firstName)
+        et_first_name.setText(mUserDeails.firstName)
 
         et_last_name.isEnabled = false
-        et_last_name.setText(userDetails.lastName)
+        et_last_name.setText(mUserDeails.lastName)
 
         et_email.isEnabled = false
-        et_email.setText(userDetails.email)
+        et_email.setText(mUserDeails.email)
 
         iv_user_photo.setOnClickListener(this@UserProfileActivity)
 
@@ -74,7 +77,29 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
 
                 R.id.btn_save -> {
                     if(validateUserProfileDetails()) {
-                        showErrorSnackBar("Your details are valid. You can update them.", false)
+                        val userHashMap = HashMap<String, Any>()
+
+                        val mobileNumber = et_mobile_number.text.toString().trim {it <= ' '}
+
+                        val gender = if(rb_male.isChecked) {
+                            Constants.MALE
+                        }else{
+                            Constants.FEMALE
+                        }
+
+                        if(mobileNumber.isNotEmpty()) {
+                            userHashMap[Constants.MOBILE] = mobileNumber.toLong()
+                        }
+
+                        //key: Gender value: male
+                        //gender:male
+                        userHashMap[Constants.GENDER] = gender
+
+                        showProgressDialog(resources.getString(R.string.please_wait))
+
+                        FireStoreClass().updateUserProfileData(this, userHashMap)
+
+                        //showErrorSnackBar("Your details are valid. You can update them.", false)
                     }
                 }
             }

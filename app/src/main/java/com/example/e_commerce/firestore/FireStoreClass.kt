@@ -6,11 +6,13 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.example.e_commerce.activities.LoginActivity
 import com.example.e_commerce.activities.RegisterActivity
+import com.example.e_commerce.activities.UserProfileActivity
 import com.example.e_commerce.models.User
 import com.example.e_commerce.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.UserDataReader
 
 class FireStoreClass {
     private val mFireStore = FirebaseFirestore.getInstance()
@@ -86,6 +88,28 @@ class FireStoreClass {
                     }
                 }
                 Log.e(activity.javaClass.simpleName, e.toString())
+            }
+    }
+
+    fun updateUserProfileData(activity: Activity, userHashMap: HashMap<String, Any>) {
+        mFireStore.collection(Constants.USERS).document(getCurrentUserId())
+            .update(userHashMap)
+            .addOnSuccessListener {
+                when(activity) {
+                    is UserProfileActivity -> {
+                        //hide the progress dialog if there is any error, and print the error in log
+                        activity.hideProgressDialog()
+                    }
+                }
+            }
+            .addOnFailureListener{ e ->
+                when(activity) {
+                    is UserProfileActivity -> {
+                        //hide the progress dialog if there is any error, and print the error in log
+                        activity.hideProgressDialog()
+                    }
+                }
+                Log.e(activity.javaClass.simpleName, "Error while updating user details", e)
             }
     }
 }
