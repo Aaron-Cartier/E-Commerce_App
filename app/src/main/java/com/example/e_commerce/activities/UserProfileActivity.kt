@@ -24,6 +24,7 @@ import java.io.IOException
 class UserProfileActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var mUserDeails: User
+    private var mSelectedImageFileUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,31 +77,36 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                 }
 
                 R.id.btn_save -> {
-                    if(validateUserProfileDetails()) {
-                        val userHashMap = HashMap<String, Any>()
 
-                        val mobileNumber = et_mobile_number.text.toString().trim {it <= ' '}
+                    showProgressDialog(resources.getString(R.string.please_wait))
 
-                        val gender = if(rb_male.isChecked) {
-                            Constants.MALE
-                        }else{
-                            Constants.FEMALE
-                        }
+                    FireStoreClass().uploadImageToCloudStorage(this, mSelectedImageFileUri)
 
-                        if(mobileNumber.isNotEmpty()) {
-                            userHashMap[Constants.MOBILE] = mobileNumber.toLong()
-                        }
-
-                        //key: Gender value: male
-                        //gender:male
-                        userHashMap[Constants.GENDER] = gender
-
-                        showProgressDialog(resources.getString(R.string.please_wait))
-
-                        FireStoreClass().updateUserProfileData(this, userHashMap)
-
-                        //showErrorSnackBar("Your details are valid. You can update them.", false)
-                    }
+//                    if(validateUserProfileDetails()) {
+//                        val userHashMap = HashMap<String, Any>()
+//
+//                        val mobileNumber = et_mobile_number.text.toString().trim {it <= ' '}
+//
+//                        val gender = if(rb_male.isChecked) {
+//                            Constants.MALE
+//                        }else{
+//                            Constants.FEMALE
+//                        }
+//
+//                        if(mobileNumber.isNotEmpty()) {
+//                            userHashMap[Constants.MOBILE] = mobileNumber.toLong()
+//                        }
+//
+//                        //key: Gender value: male
+//                        //gender:male
+//                        userHashMap[Constants.GENDER] = gender
+//
+//                        showProgressDialog(resources.getString(R.string.please_wait))
+//
+//                        FireStoreClass().updateUserProfileData(this, userHashMap)
+//
+//                        //showErrorSnackBar("Your details are valid. You can update them.", false)
+//                    }
                 }
             }
         }
@@ -130,10 +136,10 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                 if(data != null) {
                     try {
                         //the uri of selected image from phone storage
-                        val selectedImageFileUri = data.data!!
+                        mSelectedImageFileUri = data.data!!
 
                         //iv_user_photo.setImageURI(selectedImageFileUri)
-                        GlideLoader(this).loadUserPicture(selectedImageFileUri,iv_user_photo)
+                        GlideLoader(this).loadUserPicture(mSelectedImageFileUri!!,iv_user_photo)
                     } catch (e: IOException) {
                         e.printStackTrace()
                         Toast.makeText(this@UserProfileActivity, resources.getString(R.string.image_selection_failed),
@@ -167,5 +173,11 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
 
         startActivity(Intent(this@UserProfileActivity, MainActivity::class.java))
         finish()
+    }
+
+    fun imageUploadSuccess(imageUrl: String) {
+        hideProgressDialog()
+        Toast.makeText(this@UserProfileActivity, "Your image has been uploaded at the URL $imageUrl", Toast.LENGTH_SHORT)
+            .show()
     }
 }
