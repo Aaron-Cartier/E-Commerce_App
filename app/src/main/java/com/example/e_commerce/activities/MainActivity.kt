@@ -17,20 +17,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //val sharedPreferences = getSharedPreferences(Constants.E_COMMERCE_PREFERENCES, Context.MODE_PRIVATE)
-        //val username = sharedPreferences.getString(Constants.LOGGED_IN_USERNAME, "")!!
-        //tv_main.text = "Hello $username."
+        val sharedPreferences = getSharedPreferences(Constants.E_COMMERCE_PREFERENCES, Context.MODE_PRIVATE)
+        val username = sharedPreferences.getString(Constants.LOGGED_IN_USERNAME, "")!!
+        tv_main.text = "Hello $username."
 
-        btnCameraPermission.setOnClickListener {
-            if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
-               ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this,"You already have the permission to access camera and the GPS", Toast.LENGTH_LONG).show()
-            }else{
-                //Request permission
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA,
-                                                                        Manifest.permission.ACCESS_FINE_LOCATION), CAMERA_AND_FIND_LOCATION_PERMISSION_CODE)
-            }
-        }
+//        btnCameraPermission.setOnClickListener {
+//            if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
+//               ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+//                Toast.makeText(this,"You already have the permission to access camera and the GPS", Toast.LENGTH_LONG).show()
+//            }else{
+//                //Request permission
+//                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA,
+//                                                                        Manifest.permission.ACCESS_FINE_LOCATION), CAMERA_AND_FIND_LOCATION_PERMISSION_CODE)
+//            }
+//        }
     }
 
     override fun onRequestPermissionsResult(
