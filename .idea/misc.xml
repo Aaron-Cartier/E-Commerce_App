@@ -3,12 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/drawable-v24/ic_vector_chevron_right.xml" value="0.290625" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/drawable-v24/ic_vector_dashboard.xml" value="0.290625" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/drawable-v24/ic_vector_orders.xml" value="0.290625" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/drawable-v24/ic_vector_products.xml" value="0.290625" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/drawable-v24/ic_vector_settings.xml" value="0.290625" />
+        <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/drawable-v24/item_grey_border_background.xml" value="0.290625" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/activity_dashboard.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/activity_main.xml" value="0.16893115942028986" />
+        <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/activity_register.xml" value="0.1526268115942029" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/activity_settings.xml" value="0.25679347826086957" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/activity_user_profile.xml" value="0.17391304347826086" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/menu/bottom_nav_menu.xml" value="0.27447916666666666" />
