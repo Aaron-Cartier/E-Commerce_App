@@ -1,16 +1,13 @@
-package com.example.e_commerce.activities
+package com.example.e_commerce.ui.activities
 
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import com.example.e_commerce.R
 import com.example.e_commerce.utils.Constants
 import kotlinx.android.synthetic.main.activity_main.*
-import android.Manifest
-import androidx.core.app.ActivityCompat
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

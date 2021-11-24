@@ -1,11 +1,9 @@
-package com.example.e_commerce.activities
+package com.example.e_commerce.ui.activities
 
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
@@ -14,7 +12,6 @@ import com.example.e_commerce.firestore.FireStoreClass
 import com.example.e_commerce.models.User
 import com.example.e_commerce.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.core.FirestoreClient
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 

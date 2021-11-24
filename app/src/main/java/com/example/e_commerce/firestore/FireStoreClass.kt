@@ -5,15 +5,14 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
-import com.example.e_commerce.activities.LoginActivity
-import com.example.e_commerce.activities.RegisterActivity
-import com.example.e_commerce.activities.UserProfileActivity
+import com.example.e_commerce.ui.activities.LoginActivity
+import com.example.e_commerce.ui.activities.RegisterActivity
+import com.example.e_commerce.ui.activities.UserProfileActivity
 import com.example.e_commerce.models.User
 import com.example.e_commerce.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import com.google.firebase.firestore.UserDataReader
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 

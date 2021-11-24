@@ -1,11 +1,10 @@
-package com.example.e_commerce.activities
+package com.example.e_commerce.ui.activities
 
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log

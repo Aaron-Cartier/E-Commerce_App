@@ -14,28 +14,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.DashboardActivity"
+            android:name="com.example.e_commerce.ui.activities.DashboardActivity"
             android:exported="false"
             android:label="@string/app_name" />
         <activity
-            android:name=".activities.UserProfileActivity"
+            android:name="com.example.e_commerce.ui.activities.UserProfileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.ForgotPasswordActivity"
+            android:name="com.example.e_commerce.ui.activities.ForgotPasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.BaseActivity" />
+        <activity android:name="com.example.e_commerce.ui.activities.BaseActivity" />
         <activity
-            android:name=".activities.RegisterActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activities.LoginActivity"
+            android:name="com.example.e_commerce.ui.activities.RegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.SplashActivity"
+            android:name="com.example.e_commerce.ui.activities.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.e_commerce.ui.activities.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -45,7 +45,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MainActivity"
+            android:name="com.example.e_commerce.ui.activities.MainActivity"
             android:screenOrientation="portrait" />
     </application>
 
