@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.e_commerce.databinding.FragmentNotificationsBinding
+import com.example.e_commerce.databinding.FragmentProductsBinding
 
-class NotificationsFragment : Fragment() {
+class ProductsFragment : Fragment() {
 
-    //private lateinit var notificationsViewModel: NotificationsViewModel
-    private var _binding: FragmentNotificationsBinding? = null
+    //private lateinit var homeViewModel: HomeViewModel
+    private var _binding: FragmentProductsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,15 +22,15 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        notificationsViewModel =
-//            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+//        homeViewModel =
+//            ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentProductsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        //.text.observe(viewLifecycleOwner, Observer {
-        textView.text = "This is the notification fragment."
+        val textView: TextView = binding.textHome
+        //homeViewModel.text.observe(viewLifecycleOwner, Observer {
+        textView.text = "This is the products fragment."
 
         return root
     }
