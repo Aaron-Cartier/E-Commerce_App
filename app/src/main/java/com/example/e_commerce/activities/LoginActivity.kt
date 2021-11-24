@@ -121,7 +121,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             startActivity(intent)
         }else{
             //redirect the user to the main screen after log in
-            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
         }
         finish()
     }
