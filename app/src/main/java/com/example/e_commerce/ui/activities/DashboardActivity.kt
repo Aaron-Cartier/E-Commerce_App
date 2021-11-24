@@ -1,6 +1,8 @@
 package com.example.e_commerce.ui.activities
 
+import android.content.Context
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -18,6 +20,13 @@ class DashboardActivity : BaseActivity() {
 
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar!!.setBackgroundDrawable(
+            ContextCompat.getDrawable(
+                this@DashboardActivity,
+                R.drawable.app_gradient_color_background
+            )
+        )
 
         val navView: BottomNavigationView = binding.navView
 
