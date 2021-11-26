@@ -73,10 +73,10 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
         // Load the image using the Glide Loader class.
         GlideLoader(this@SettingsActivity).loadUserPicture(user.image, iv_user_photo)
 
-        tv_name.text = Editable.Factory.getInstance().newEditable("${user.firstName} ${user.lastName}") //"${user.firstName} ${user.lastName}"
-        tv_gender.text = Editable.Factory.getInstance().newEditable(user.gender) //user.gender
-        tv_email.text = Editable.Factory.getInstance().newEditable(user.email) //user.email
-        tv_mobile_number.text = Editable.Factory.getInstance().newEditable("${user.mobile}") //"${user.mobile}"
+        tv_name.setText("${user.firstName} ${user.lastName}")
+        tv_gender.setText(user.gender)
+        tv_email.setText(user.email)
+        tv_mobile_number.setText("${user.mobile}")
     }
 
     override fun onClick(v: View?) {
