@@ -28,7 +28,7 @@ class SplashActivity : AppCompatActivity() {
         Handler().postDelayed(
             {
                 //launches the main activity
-                startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
+                startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
                 finish() //call this when your activity is done and should be closed.
             },
             2500
