@@ -8,12 +8,12 @@ import com.example.e_commerce.R
 import java.io.IOException
 
 class GlideLoader(val context: Context) {
-    fun loadUserPicture(imageUri: Uri, imageView: ImageView){
+    fun loadUserPicture(image: Any, imageView: ImageView){
         try {
             //load the user image in the ImageView
             Glide
                 .with(context)
-                .load(imageUri) //uri of the image
+                .load(image) //uri of the image
                 .centerCrop() //scale type of the image
                 .placeholder(R.drawable.ic_user_placeholder) //default place holder if image faled to load
                 .into(imageView) //the view in which the image will be loaded
