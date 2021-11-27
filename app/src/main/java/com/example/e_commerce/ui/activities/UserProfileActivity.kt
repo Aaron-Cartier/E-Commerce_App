@@ -61,7 +61,8 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
             setupActionBar()
 
             // Update the title of the screen to edit profile.
-            tv_titleUP.text = resources.getString(R.string.title_edit_profile)
+            tv_titleUP.text = resources.getString(R.string.title_complete_profile)
+
 
             // Load the image using the GlideLoader class with the use of Glide Library.
             GlideLoader(this@UserProfileActivity).loadUserPicture(mUserDetails.image, iv_user_photo)

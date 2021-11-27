@@ -39,6 +39,7 @@
     <dimen name="gender_radio_button_radius">5dp</dimen>
     <dimen name="gender_radio_button_stroke_width">1dp</dimen>
     <dimen name="user_profile_toolbar_title_paddingStart">-72dp</dimen>
+    <dimen name="complete_profile_toolbar_title_paddingStart">-19dp</dimen>
 
     <dimen name="header_image_height">200dp</dimen>
     <dimen name="settings_user_image_size">150dp</dimen>
