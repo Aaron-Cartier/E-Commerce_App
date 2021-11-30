@@ -4,8 +4,11 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -17,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_add_product.*
 import java.io.IOException
 
 class AddProductActivity : BaseActivity(), View.OnClickListener {
+    private var mSelectedImageFileURI: Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_product)
@@ -24,6 +28,7 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
         setupActionBar()
 
         iv_add_update_product.setOnClickListener(this)
+        btn_submit_add_product.setOnClickListener(this)
     }
 
     private fun setupActionBar() {
@@ -59,6 +64,12 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
                             arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                             Constants.READ_STORAGE_PERMISSION_CODE
                         )
+                    }
+                }
+
+                R.id.btn_submit_add_product -> {
+                    if(validateProductDetails()) {
+                        showErrorSnackBar("Product details valid", false)
                     }
                 }
             }
@@ -102,13 +113,55 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
             )
 
             // The uri of selection image from phone storage.
-            val selectedImageFileURI = data.data!!
+            mSelectedImageFileURI = data.data!!
 
             try {
                 // Load the product image in the ImageView.
-                GlideLoader(this@AddProductActivity).loadUserPicture(selectedImageFileURI, iv_product_image)
+                GlideLoader(this@AddProductActivity).loadUserPicture(mSelectedImageFileURI!!, iv_product_image)
             } catch (e: IOException) {
                 e.printStackTrace()
+            }
+        }else if (resultCode == Activity.RESULT_CANCELED) {
+            //a log is printed when user close or cancel the image selection
+            Log.e("Request cancelled", "Image selection cancelled")
+        }
+    }
+
+    private fun validateProductDetails(): Boolean {
+        return when {
+
+            mSelectedImageFileURI == null -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_select_product_image), true)
+                false
+            }
+
+            TextUtils.isEmpty(et_product_title.text.toString().trim { it <= ' ' }) -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_product_title), true)
+                false
+            }
+
+            TextUtils.isEmpty(et_product_price.text.toString().trim { it <= ' ' }) -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_product_price), true)
+                false
+            }
+
+            TextUtils.isEmpty(et_product_description.text.toString().trim { it <= ' ' }) -> {
+                showErrorSnackBar(
+                    resources.getString(R.string.err_msg_enter_product_description),
+                    true
+                )
+                false
+            }
+
+            TextUtils.isEmpty(et_product_quantity.text.toString().trim { it <= ' ' }) -> {
+                showErrorSnackBar(
+                    resources.getString(R.string.err_msg_enter_product_quantity),
+                    true
+                )
+                false
+            }
+            else -> {
+                true
             }
         }
     }

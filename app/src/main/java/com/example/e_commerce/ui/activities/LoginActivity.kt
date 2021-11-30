@@ -37,7 +37,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         btn_login.setOnClickListener(this)
 
         //click event assigned to Register text
-        tv_register.setOnClickListener(this )
+        tv_register.setOnClickListener(this)
+    }
 
     override fun  onClick(view: View?) {
         if(view != null) {
