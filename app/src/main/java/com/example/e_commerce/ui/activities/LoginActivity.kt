@@ -39,13 +39,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         //click event assigned to Register text
         tv_register.setOnClickListener(this )
 
-//        tv_register.setOnClickListener {
-//            //Launches the register screen when the user clicks on the text
-//            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
-//            startActivity(intent)
-//        }
-    }
-
     override fun  onClick(view: View?) {
         if(view != null) {
             when(view.id) {
