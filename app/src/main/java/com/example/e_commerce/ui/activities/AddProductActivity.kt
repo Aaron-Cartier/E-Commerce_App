@@ -72,7 +72,6 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
                         )
                     }
                 }
-
                 R.id.btn_submit_add_product -> {
                     if(validateProductDetails()) {
                         uploadProductImage()
