@@ -6,11 +6,9 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.provider.Settings
 import android.util.Log
-import com.example.e_commerce.ui.activities.LoginActivity
-import com.example.e_commerce.ui.activities.RegisterActivity
-import com.example.e_commerce.ui.activities.UserProfileActivity
+import com.example.e_commerce.models.Product
 import com.example.e_commerce.models.User
-import com.example.e_commerce.ui.activities.SettingsActivity
+import com.example.e_commerce.ui.activities.*
 import com.example.e_commerce.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -125,9 +123,9 @@ class FireStoreClass {
             }
     }
 
-    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?) {
+    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?, imageType: String) {
         val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
-            Constants.USER_PROFILE_IMAGE + System.currentTimeMillis() + " "
+            imageType + System.currentTimeMillis() + " "
                     + Constants.getFileExtention(activity, imageFileURI)
         )
 
@@ -142,6 +140,9 @@ class FireStoreClass {
                     is UserProfileActivity -> {
                         activity.imageUploadSuccess(uri.toString())
                     }
+                    is AddProductActivity -> {
+                        activity.imageUploadSuccess(uri.toString())
+                    }
                 }
             }
         }
@@ -151,9 +152,30 @@ class FireStoreClass {
                     is UserProfileActivity -> {
                         activity.hideProgressDialog()
                     }
+                    is AddProductActivity -> {
+                        activity.hideProgressDialog()
+                    }
                 }
 
                 Log.e(activity.javaClass.simpleName, exception.message, exception)
+            }
+    }
+
+    fun uploadProductDetails(activity: AddProductActivity, productInfo: Product) {
+        mFireStore.collection(Constants.PRODUCTS)
+            .document()
+            .set(productInfo, SetOptions.merge())
+            .addOnSuccessListener {
+                //here call a function to base activity for transferring the result to it
+                activity.productUploadSuccess()
+            }
+            .addOnFailureListener() { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while uploading the product details",
+                    e
+                )
             }
     }
 }

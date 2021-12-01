@@ -84,4 +84,6 @@
     <string name="err_msg_enter_product_price">Please enter product price.</string>
     <string name="err_msg_enter_product_description">Please enter product description.</string>
     <string name="err_msg_enter_product_quantity">Please enter product quantity.</string>
+
+    <string name="product_uploaded_success">Product successfully uploaded.</string>
 </resources>

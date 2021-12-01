@@ -2,6 +2,7 @@ package com.example.e_commerce.ui.activities
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -14,13 +15,18 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.e_commerce.R
+import com.example.e_commerce.firestore.FireStoreClass
+import com.example.e_commerce.models.Product
 import com.example.e_commerce.utils.Constants
 import com.example.e_commerce.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_add_product.*
 import java.io.IOException
 
 class AddProductActivity : BaseActivity(), View.OnClickListener {
+
     private var mSelectedImageFileURI: Uri? = null
+    private var mProductImageURL: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_product)
@@ -69,7 +75,7 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
 
                 R.id.btn_submit_add_product -> {
                     if(validateProductDetails()) {
-                        showErrorSnackBar("Product details valid", false)
+                        uploadProductImage()
                     }
                 }
             }
@@ -164,5 +170,42 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
                 true
             }
         }
+    }
+
+    private fun uploadProductImage() {
+        showProgressDialog(resources.getString(R.string.please_wait))
+        FireStoreClass().uploadImageToCloudStorage(this, mSelectedImageFileURI, Constants.PRODUCT_IMAGE)
+    }
+
+    fun productUploadSuccess() {
+        hideProgressDialog()
+        Toast.makeText(
+            this@AddProductActivity, resources.getString(R.string.product_uploaded_success),
+            Toast.LENGTH_SHORT).show()
+        finish()
+    }
+
+    fun imageUploadSuccess(imageUrl: String) {
+        mProductImageURL = imageUrl
+
+        uploadProductDetails()
+    }
+
+    private fun uploadProductDetails() {
+        val username = this.getSharedPreferences(
+            Constants.E_COMMERCE_PREFERENCES, Context.MODE_PRIVATE)
+            .getString(Constants.LOGGED_IN_USERNAME, "")!!
+
+        val product = Product(
+        FireStoreClass().getCurrentUserId(),
+        username,
+        et_product_title.text.toString().trim {it <= ' '},
+        et_product_price.text.toString().trim {it <= ' '},
+        et_product_description.text.toString().trim {it <= ' '},
+        et_product_quantity.text.toString().trim {it <= ' '},
+        mProductImageURL
+        )
+
+        FireStoreClass().uploadProductDetails(this, product)
     }
 }
