@@ -10,7 +10,7 @@ import com.example.e_commerce.databinding.FragmentProductsBinding
 import com.example.e_commerce.ui.activities.AddProductActivity
 import com.example.e_commerce.ui.activities.SettingsActivity
 
-class ProductsFragment : Fragment() {
+class ProductsFragment : BaseFragment() {
 
     //private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentProductsBinding? = null
@@ -35,10 +35,6 @@ class ProductsFragment : Fragment() {
 
         _binding = FragmentProductsBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        val textView: TextView = binding.textHome
-        //homeViewModel.text.observe(viewLifecycleOwner, Observer {
-        textView.text = "This is the products fragment."
 
         return root
     }

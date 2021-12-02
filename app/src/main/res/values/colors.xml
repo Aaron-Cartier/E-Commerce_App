@@ -23,4 +23,6 @@
 
     <color name="colorImageViewBackground">#E1E1E1</color>
 
+    <color name="colorOffWhite">#F8F8F8</color>
+
 </resources>
