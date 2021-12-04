@@ -6,9 +6,11 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.provider.Settings
 import android.util.Log
+import androidx.fragment.app.Fragment
 import com.example.e_commerce.models.Product
 import com.example.e_commerce.models.User
 import com.example.e_commerce.ui.activities.*
+import com.example.e_commerce.ui.fragments.ProductsFragment
 import com.example.e_commerce.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -176,6 +178,28 @@ class FireStoreClass {
                     "Error while uploading the product details",
                     e
                 )
+            }
+    }
+
+    fun getProductsList(fragment: Fragment) {
+        mFireStore.collection(Constants.PRODUCTS)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserId())
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e("Products List", document.documents.toString())
+                val productsList: ArrayList<Product> = ArrayList()
+                for(i in document.documents) {
+                    val product = i.toObject(Product::class.java)
+                    product!!.product_id = i.id
+
+                    productsList.add(product)
+                }
+
+                when(fragment) {
+                    is ProductsFragment -> {
+                        fragment.successProductsListFromFireStore(productsList)
+                    }
+                }
             }
     }
 }

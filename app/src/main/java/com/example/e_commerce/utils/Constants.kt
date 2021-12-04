@@ -21,13 +21,14 @@ object Constants {
     const val FEMALE: String = "female"
     const val FIRST_NAME: String = "firstName"
     const val LAST_NAME: String = "lastName"
-
     const val MOBILE: String = "mobile"
     const val GENDER: String = "gender"
     const val IMAGE: String = "image"
     const val COMPLETE_PROFILE: String = "profileCompleted"
 
     const val PRODUCT_IMAGE: String = "Product_Image"
+
+    const val USER_ID: String = "user_id"
 
     const val USER_PROFILE_IMAGE = "User_Profile_Image"
 

@@ -2,11 +2,14 @@ package com.example.e_commerce.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.e_commerce.R
 import com.example.e_commerce.databinding.FragmentProductsBinding
+import com.example.e_commerce.firestore.FireStoreClass
+import com.example.e_commerce.models.Product
 import com.example.e_commerce.ui.activities.AddProductActivity
 import com.example.e_commerce.ui.activities.SettingsActivity
 
@@ -23,6 +26,23 @@ class ProductsFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         //if we want to use the option menu in fragment we need to add it
         setHasOptionsMenu(true)
+    }
+
+    fun successProductsListFromFireStore(productsList: ArrayList<Product>) {
+        hideProgressDialog()
+        for(i in productsList) {
+            Log.e("Product name", i.title)
+        }
+    }
+
+    private fun getProductListFromFireStore() {
+        showProgressDialog(resources.getString(R.string.please_wait))
+        FireStoreClass().getProductsList(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getProductListFromFireStore()
     }
 
     override fun onCreateView(
