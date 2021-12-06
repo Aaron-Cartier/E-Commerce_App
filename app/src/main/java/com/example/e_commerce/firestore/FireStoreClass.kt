@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.example.e_commerce.models.Product
 import com.example.e_commerce.models.User
 import com.example.e_commerce.ui.activities.*
+import com.example.e_commerce.ui.fragments.DashboardFragment
 import com.example.e_commerce.ui.fragments.ProductsFragment
 import com.example.e_commerce.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
@@ -200,6 +201,29 @@ class FireStoreClass {
                         fragment.successProductsListFromFireStore(productsList)
                     }
                 }
+            }
+    }
+
+    fun getDashboardItemsList(fragment: DashboardFragment) {
+        mFireStore.collection(Constants.PRODUCTS)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(fragment.javaClass.simpleName, document.documents.toString())
+
+                val productsList: ArrayList<Product> = ArrayList()
+
+                for(i in document.documents) {
+                    val product = i.toObject(Product::class.java)!!
+                    product.product_id = i.id
+                    productsList.add(product)
+                }
+
+                fragment.successDashboardItemsList(productsList)
+            }
+            .addOnFailureListener{ e ->
+                //hide the progress dialog if there is any error with retrieving the dashboard item list
+                fragment.hideProgressDialog()
+                Log.e(fragment.javaClass.simpleName, "Error white getting dashboard item list.", e)
             }
     }
 }

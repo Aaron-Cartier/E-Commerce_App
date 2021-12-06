@@ -87,5 +87,6 @@
 
     <string name="product_uploaded_success">Product successfully uploaded.</string>
 
+    <string name="no_dashboard_items_found">No items found!</string>
     <string name="no_products_added_yet">No products added yet!</string>
 </resources>
