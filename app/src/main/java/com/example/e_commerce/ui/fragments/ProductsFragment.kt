@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_commerce.R
@@ -41,7 +42,7 @@ class ProductsFragment : BaseFragment() {
 
             rv_my_product_items.layoutManager = LinearLayoutManager(activity)
             rv_my_product_items.setHasFixedSize(true)
-            val adapterProducts = MyProductsListAdapter(requireActivity(), productsList)
+            val adapterProducts = MyProductsListAdapter(requireActivity(), productsList, this)
             rv_my_product_items.adapter = adapterProducts
         }else{
             rv_my_product_items.visibility = View.GONE
@@ -95,5 +96,10 @@ class ProductsFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun deleteProduct(productId: String) {
+        Toast.makeText(requireActivity(), "You can now delete the product. $productId", Toast.LENGTH_SHORT)
+            .show()
     }
 }
