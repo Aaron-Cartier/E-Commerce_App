@@ -89,4 +89,10 @@
 
     <string name="no_dashboard_items_found">No items found!</string>
     <string name="no_products_added_yet">No products added yet!</string>
+
+    <string name="product_delete_success_message">"Product deleted successfully. "</string>
+    <string name="delete_dialog_title">Delete</string>
+    <string name="delete_dialog_message">Are you sure you want to delete this product?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

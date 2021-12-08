@@ -1,5 +1,6 @@
 package com.example.e_commerce.ui.fragments
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -47,8 +48,6 @@ class ProductsFragment : BaseFragment() {
         }else{
             rv_my_product_items.visibility = View.GONE
             tv_no_products_found.visibility = View.VISIBLE
-
-
         }
     }
 
@@ -99,7 +98,44 @@ class ProductsFragment : BaseFragment() {
     }
 
     fun deleteProduct(productId: String) {
-        Toast.makeText(requireActivity(), "You can now delete the product. $productId", Toast.LENGTH_SHORT)
+        showAlertDialogToDeleteProduct(productId)
+    }
+
+    fun productDeleteSuccess() {
+        hideProgressDialog()
+
+        Toast.makeText(requireActivity(), resources.getString(R.string.product_delete_success_message), Toast.LENGTH_SHORT)
             .show()
+
+        getProductListFromFireStore()
+    }
+
+    private fun showAlertDialogToDeleteProduct(productId: String) {
+        val builder = AlertDialog.Builder(requireActivity())
+        //set title for the alert dialog
+        builder.setTitle(resources.getString(R.string.delete_dialog_title))
+        //set the message for the alert dialog
+        builder.setMessage(resources.getString(R.string.delete_dialog_message))
+        builder.setIcon(android.R.drawable.ic_dialog_alert)
+
+        //performing positive action
+        builder.setPositiveButton(resources.getString(R.string.yes)) { dialogInterface, _ ->
+            showProgressDialog(resources.getString(R.string.please_wait))
+
+            FireStoreClass().deleteProduct(this, productId)
+
+            dialogInterface.dismiss()
+        }
+
+        //performing negative action
+        builder.setNegativeButton(resources.getString(R.string.no)) { dialogInterface, _ ->
+            dialogInterface.dismiss()
+        }
+
+        //create the alert dialog
+        val alertDialog: AlertDialog = builder.create()
+        //set other dialog properties
+        alertDialog.setCancelable(false)
+        alertDialog.show()
     }
 }

@@ -226,4 +226,22 @@ class FireStoreClass {
                 Log.e(fragment.javaClass.simpleName, "Error white getting dashboard item list.", e)
             }
     }
+
+    fun deleteProduct(fragment: ProductsFragment, productId: String) {
+        mFireStore.collection(Constants.PRODUCTS)
+            .document(productId)
+            .delete()
+            .addOnSuccessListener {
+                fragment.productDeleteSuccess()
+            }.addOnFailureListener { e ->
+                //hide the progress dialog if there is an error
+                fragment.hideProgressDialog()
+
+                Log.e(
+                    fragment.requireActivity().javaClass.simpleName,
+                    "Error while deleting the product",
+                    e
+                )
+            }
+    }
 }
