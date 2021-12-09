@@ -10,6 +10,7 @@ import com.example.e_commerce.R
 import com.example.e_commerce.models.Product
 import com.example.e_commerce.ui.activities.ProductDetailsActivity
 import com.example.e_commerce.ui.fragments.ProductsFragment
+import com.example.e_commerce.utils.Constants
 import com.example.e_commerce.utils.GlideLoader
 import kotlinx.android.synthetic.main.item_list_layout.view.*
 
@@ -45,6 +46,7 @@ open class MyProductsListAdapter (
 
             holder.itemView.setOnClickListener {
                 val intent = Intent(context, ProductDetailsActivity::class.java)
+                intent.putExtra(Constants.EXTRA_PRODUCT_ID, model.product_id)
                 context.startActivity(intent)
             }
         }
