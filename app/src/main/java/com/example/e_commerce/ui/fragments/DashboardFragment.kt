@@ -2,6 +2,7 @@ package com.example.e_commerce.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.SyncStateContract
 import android.util.Log
 import android.view.*
 import android.widget.TextView
@@ -11,8 +12,10 @@ import com.example.e_commerce.R
 import com.example.e_commerce.databinding.FragmentDashboardBinding
 import com.example.e_commerce.firestore.FireStoreClass
 import com.example.e_commerce.models.Product
+import com.example.e_commerce.ui.activities.ProductDetailsActivity
 import com.example.e_commerce.ui.activities.SettingsActivity
 import com.example.e_commerce.ui.adapters.DashboardItemsListAdapter
+import com.example.e_commerce.utils.Constants
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 class DashboardFragment : BaseFragment() {
@@ -81,6 +84,14 @@ class DashboardFragment : BaseFragment() {
 
             val  adapter = DashboardItemsListAdapter(requireActivity(), dashboardItemsList)
             rv_dashboard_items.adapter = adapter
+
+//            adapter.setOnClickListener(object: DashboardItemsListAdapter.OnClickListener {
+//                override fun onClick(position: Int, product: Product) {
+//                    val intent = Intent(context, ProductDetailsActivity::class.java)
+//                    intent.putExtra(Constants.EXTRA_PRODUCT_ID, product.product_id)
+//                    startActivity(intent)
+//                }
+//            })
         }else{
             rv_dashboard_items.visibility = View.GONE
             tv_no_dashboard_items_found.visibility = View.VISIBLE
