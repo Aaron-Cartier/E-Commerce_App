@@ -68,11 +68,16 @@ open class DashboardItemsListAdapter(
                 intent.putExtra(Constants.EXTRA_PRODUCT_ID, model.product_id)
                 context.startActivity(intent)
             }
-//            holder.itemView.setOnClickListener {
-//                if(onClickListener != null) {
-//                    onClickListener!!.onClick(position, model)
-//                }
-//            }
+
+            /**
+            - second way of implementing on click for dashboard product
+
+            holder.itemView.setOnClickListener {
+                if(onClickListener != null) {
+                   onClickListener!!.onClick(position, model)
+                }
+            }
+             **/
         }
     }
 
