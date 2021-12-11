@@ -34,6 +34,8 @@ object Constants {
 
     const val EXTRA_PRODUCT_ID: String = "extra_product_id"
 
+    const val EXTRA_PRODUCT_OWNER_ID: String = "extra_product_owner_id"
+
     fun showImageChooser(activity: Activity) {
         //an intent for launching the image selection of phone storage
         val galleryIntent = Intent(

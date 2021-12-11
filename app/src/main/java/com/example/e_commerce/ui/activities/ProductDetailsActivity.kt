@@ -3,6 +3,7 @@ package com.example.e_commerce.ui.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.example.e_commerce.R
 import com.example.e_commerce.firestore.FireStoreClass
 import com.example.e_commerce.models.Product
@@ -23,7 +24,18 @@ class ProductDetailsActivity : BaseActivity() {
 
         if(intent.hasExtra(Constants.EXTRA_PRODUCT_ID)) {
             mProductId = intent.getStringExtra(Constants.EXTRA_PRODUCT_ID)!!
-            Log.i("product id", mProductId)
+        }
+
+        var productOwnerId: String = ""
+
+        if(intent.hasExtra(Constants.EXTRA_PRODUCT_OWNER_ID)) {
+            productOwnerId = intent.getStringExtra(Constants.EXTRA_PRODUCT_OWNER_ID)!!
+        }
+
+        if(FireStoreClass().getCurrentUserId() == productOwnerId){
+            btn_add_to_cart.visibility = View.GONE
+        }else{
+            btn_add_to_cart.visibility = View.VISIBLE
         }
 
         getProductDetails()
