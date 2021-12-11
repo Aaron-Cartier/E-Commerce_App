@@ -244,4 +244,22 @@ class FireStoreClass {
                 )
             }
     }
+
+    fun getProductDetails(activity: ProductDetailsActivity, productId: String) {
+        mFireStore.collection(Constants.PRODUCTS)
+            .document(productId)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(activity.javaClass.simpleName, document.toString())
+                val product = document.toObject(Product::class.java)
+                if(product != null) {
+                    activity.productDetailsSuccess(product)
+                }
+            }
+            .addOnFailureListener { e ->
+                //hide the progress dialog is there is an error
+                activity.hideProgressDialog()
+                Log.e(activity.javaClass.simpleName, "Error while getting product details", e)
+            }
+    }
 }
