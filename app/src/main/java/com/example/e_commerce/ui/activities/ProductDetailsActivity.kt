@@ -37,6 +37,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 
         if(FireStoreClass().getCurrentUserId() == productOwnerId){
             btn_add_to_cart.visibility = View.GONE
+            btn_cart.visibility = View.GONE
         }else{
             btn_add_to_cart.visibility = View.VISIBLE
         }
@@ -44,6 +45,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         getProductDetails()
 
         btn_add_to_cart.setOnClickListener(this)
+        btn_cart.setOnClickListener(this)
     }
 
     private fun setupActionBar() {
@@ -63,7 +65,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
     }
     fun productDetailsSuccess(product: Product) {
         mProductDetails = product
-        hideProgressDialog()
+
         GlideLoader(this@ProductDetailsActivity).loadUserPicture(
             product.image,
             iv_product_detail_image
@@ -72,6 +74,12 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         tv_product_details_price.setText("${product.price}")
         tv_product_details_description.setText(product.description)
         tv_product_details_stock_quantity.setText(product.stock_quantity)
+
+        if(FireStoreClass().getCurrentUserId() == product.user_id) {
+            hideProgressDialog()
+        }else{
+            FireStoreClass().checkIfItemExistsInCart(this, mProductId)
+        }
     }
 
     private fun addToCart() {
@@ -94,6 +102,15 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         resources.getString(R.string.successfully_added_item_to_cart),
         Toast.LENGTH_SHORT
         ).show()
+
+        btn_add_to_cart.visibility = View.GONE
+        btn_cart.visibility = View.VISIBLE
+    }
+
+    fun productExistsInCart() {
+        hideProgressDialog()
+        btn_cart.visibility = View.VISIBLE
+        btn_add_to_cart.visibility = View.GONE
     }
 
     override fun onClick(v: View?) {

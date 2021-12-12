@@ -102,4 +102,6 @@
 
     <string name="btn_lbl_add_to_cart">ADD TO CART</string>
     <string name="successfully_added_item_to_cart">"Item added to cart. "</string>
+    
+    <string name="btn_lbl_cart">CART</string>
 </resources>

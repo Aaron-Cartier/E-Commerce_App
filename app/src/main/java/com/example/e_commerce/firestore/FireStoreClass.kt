@@ -279,4 +279,29 @@ class FireStoreClass {
                 )
             }
     }
+
+    fun checkIfItemExistsInCart(activity: ProductDetailsActivity, productId: String) {
+        mFireStore.collection(Constants.CART_ITEMS)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserId())
+            .whereEqualTo(Constants.PRODUCT_ID, productId)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(activity.javaClass.simpleName, document.documents.toString())
+
+                if(document.documents.size > 0) {
+                    activity.productExistsInCart()
+                }else{
+                    activity.hideProgressDialog()
+                }
+            }.addOnFailureListener { e ->
+                //hide the progress dialog if there is an error
+                activity.hideProgressDialog()
+
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while checking the existing cart items",
+                    e
+                )
+            }
+    }
 }
