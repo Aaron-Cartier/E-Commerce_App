@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.example.e_commerce.R
 import com.example.e_commerce.firestore.FireStoreClass
 import com.example.e_commerce.models.CartItem
@@ -74,7 +75,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun addToCart() {
-        val addToCart = CartItem(
+        val cartItem = CartItem(
             FireStoreClass().getCurrentUserId(),
             mProductId,
             mProductDetails.title,
@@ -82,6 +83,17 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
             mProductDetails.image,
             Constants.DEFAULT_CART_QUANTITY
         )
+
+        showProgressDialog(resources.getString(R.string.please_wait))
+        FireStoreClass().addCartItems(this, cartItem)
+    }
+
+    fun addToCartSuccess() {
+        hideProgressDialog()
+        Toast.makeText(this@ProductDetailsActivity,
+        resources.getString(R.string.successfully_added_item_to_cart),
+        Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun onClick(v: View?) {

@@ -7,6 +7,7 @@ import android.net.Uri
 import android.provider.Settings
 import android.util.Log
 import androidx.fragment.app.Fragment
+import com.example.e_commerce.models.CartItem
 import com.example.e_commerce.models.Product
 import com.example.e_commerce.models.User
 import com.example.e_commerce.ui.activities.*
@@ -260,6 +261,22 @@ class FireStoreClass {
                 //hide the progress dialog is there is an error
                 activity.hideProgressDialog()
                 Log.e(activity.javaClass.simpleName, "Error while getting product details", e)
+            }
+    }
+
+    fun addCartItems(activity: ProductDetailsActivity, addToCart: CartItem) {
+        mFireStore.collection(Constants.CART_ITEMS)
+            .document()
+            .set(addToCart, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.addToCartSuccess()
+            }.addOnFailureListener { e ->
+                activity.hideProgressDialog()
+
+                Log.e(activity.javaClass.simpleName,
+                "Error while creating the document for cart item",
+                e
+                )
             }
     }
 }
