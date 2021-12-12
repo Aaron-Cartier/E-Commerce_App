@@ -6,15 +6,17 @@ import android.util.Log
 import android.view.View
 import com.example.e_commerce.R
 import com.example.e_commerce.firestore.FireStoreClass
+import com.example.e_commerce.models.CartItem
 import com.example.e_commerce.models.Product
 import com.example.e_commerce.utils.Constants
 import com.example.e_commerce.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_add_product.*
 import kotlinx.android.synthetic.main.activity_product_details.*
 
-class ProductDetailsActivity : BaseActivity() {
+class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 
     private var mProductId: String = ""
+    private lateinit var mProductDetails: Product
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +41,8 @@ class ProductDetailsActivity : BaseActivity() {
         }
 
         getProductDetails()
+
+        btn_add_to_cart.setOnClickListener(this)
     }
 
     private fun setupActionBar() {
@@ -57,6 +61,7 @@ class ProductDetailsActivity : BaseActivity() {
         FireStoreClass().getProductDetails(this, mProductId)
     }
     fun productDetailsSuccess(product: Product) {
+        mProductDetails = product
         hideProgressDialog()
         GlideLoader(this@ProductDetailsActivity).loadUserPicture(
             product.image,
@@ -66,6 +71,27 @@ class ProductDetailsActivity : BaseActivity() {
         tv_product_details_price.setText("${product.price}")
         tv_product_details_description.setText(product.description)
         tv_product_details_stock_quantity.setText(product.stock_quantity)
+    }
+
+    private fun addToCart() {
+        val addToCart = CartItem(
+            FireStoreClass().getCurrentUserId(),
+            mProductId,
+            mProductDetails.title,
+            mProductDetails.price,
+            mProductDetails.image,
+            Constants.DEFAULT_CART_QUANTITY
+        )
+    }
+
+    override fun onClick(v: View?) {
+        if(v != null) {
+            when(v.id) {
+                R.id.btn_add_to_cart -> {
+                    addToCart()
+                }
+            }
+        }
     }
 
 }
