@@ -12,6 +12,7 @@ import com.example.e_commerce.R
 import com.example.e_commerce.databinding.FragmentDashboardBinding
 import com.example.e_commerce.firestore.FireStoreClass
 import com.example.e_commerce.models.Product
+import com.example.e_commerce.ui.activities.CartListActivity
 import com.example.e_commerce.ui.activities.ProductDetailsActivity
 import com.example.e_commerce.ui.activities.SettingsActivity
 import com.example.e_commerce.ui.adapters.DashboardItemsListAdapter
@@ -66,6 +67,11 @@ class DashboardFragment : BaseFragment() {
         when(item.itemId) {
             R.id.action_settings -> {
                 startActivity(Intent(activity, SettingsActivity::class.java))
+                return true
+            }
+
+            R.id.action_cart -> {
+                startActivity(Intent(activity, CartListActivity::class.java))
                 return true
             }
         }
