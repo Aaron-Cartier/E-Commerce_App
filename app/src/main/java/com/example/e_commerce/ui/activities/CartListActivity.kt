@@ -7,11 +7,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_commerce.R
 import com.example.e_commerce.firestore.FireStoreClass
 import com.example.e_commerce.models.CartItem
+import com.example.e_commerce.models.Product
 import com.example.e_commerce.ui.adapters.CartItemsListAdapter
 import com.google.api.Distribution
 import kotlinx.android.synthetic.main.activity_cart_list.*
 
 class CartListActivity : BaseActivity() {
+
+    private lateinit var mProductsList: ArrayList<Product>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart_list)
@@ -32,12 +36,18 @@ class CartListActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        getCartItemsList()
+        //getCartItemsList()
+        getProductList()
     }
 
     private fun getCartItemsList() {
         showProgressDialog(resources.getString(R.string.please_wait))
         FireStoreClass().getCartList(this@CartListActivity)
+    }
+
+    private fun getProductList() {
+        showProgressDialog(resources.getString(R.string.please_wait))
+        FireStoreClass().getAllProductsList(this)
     }
 
     /**
@@ -84,5 +94,11 @@ class CartListActivity : BaseActivity() {
             ll_checkout.visibility = View.GONE
             tv_no_cart_item_found.visibility = View.VISIBLE
         }
+    }
+
+    fun successProductsListFromFireStore(productsList: ArrayList<Product>) {
+        mProductsList = productsList
+
+        getCartItemsList()
     }
 }

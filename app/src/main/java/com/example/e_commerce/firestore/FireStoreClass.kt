@@ -183,6 +183,27 @@ class FireStoreClass {
             }
     }
 
+    fun getAllProductsList(activity: CartListActivity) {
+        mFireStore.collection(Constants.PRODUCTS)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e("Product list", document.documents.toString())
+                val productList: ArrayList<Product> = ArrayList()
+
+                for(i in document.documents) {
+                    val product = i.toObject(Product::class.java)
+                    product!!.product_id = i.id
+
+                    productList.add(product)
+                }
+
+                activity.successProductsListFromFireStore(productList)
+            }.addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e("Get product list", "Error while getting all of the product list", e)
+            }
+    }
+
     fun getProductsList(fragment: Fragment) {
         mFireStore.collection(Constants.PRODUCTS)
             .whereEqualTo(Constants.USER_ID, getCurrentUserId())
