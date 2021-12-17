@@ -3,6 +3,7 @@ package com.example.e_commerce.ui.activities
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_commerce.R
 import com.example.e_commerce.firestore.FireStoreClass
@@ -118,6 +119,14 @@ class CartListActivity : BaseActivity() {
     fun successProductsListFromFireStore(productsList: ArrayList<Product>) {
         hideProgressDialog()
         mProductsList = productsList
+        getCartItemsList()
+    }
+
+    fun itemRemovedSuccess() {
+        hideProgressDialog()
+        Toast.makeText(this@CartListActivity, resources.getString(R.string.msg_item_removed_successfully),
+        Toast.LENGTH_SHORT).show()
+
         getCartItemsList()
     }
 }

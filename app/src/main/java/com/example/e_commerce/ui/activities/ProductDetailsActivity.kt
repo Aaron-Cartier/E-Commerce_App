@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.e_commerce.R
 import com.example.e_commerce.firestore.FireStoreClass
 import com.example.e_commerce.models.CartItem
@@ -75,6 +76,19 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         tv_product_details_price.setText("${product.price}")
         tv_product_details_description.setText(product.description)
         tv_product_details_stock_quantity.setText(product.stock_quantity)
+
+        if(product.stock_quantity.toInt() == 0) {
+            hideProgressDialog()
+            btn_add_to_cart.visibility = View.GONE
+            tv_product_details_stock_quantity.setText(resources.getString(R.string.lbl_out_of_stock))
+            tv_product_details_stock_quantity.setTextColor(ContextCompat.getColor(this@ProductDetailsActivity, R.color.colorSnackBarError))
+        }else{
+            if(FireStoreClass().getCurrentUserId() == product.user_id) {
+                hideProgressDialog()
+            }else{
+                FireStoreClass().checkIfItemExistsInCart(this, mProductId)
+            }
+        }
 
         if(FireStoreClass().getCurrentUserId() == product.user_id) {
             hideProgressDialog()
