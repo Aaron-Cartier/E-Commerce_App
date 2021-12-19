@@ -379,4 +379,25 @@ class FireStoreClass {
                 Log.e(context.javaClass.simpleName, "Error while removing item from the cart.")
             }
     }
+
+    fun updateMyCart(context: Context, cart_id: String, itemHashMap: HashMap<String, Any>) {
+        mFireStore.collection(Constants.CART_ITEMS)
+            .document(cart_id)
+            .update(itemHashMap)
+            .addOnSuccessListener {
+                when(context) {
+                    is CartListActivity -> {
+                        context.itemUpdateSuccess()
+                    }
+                }
+            }.addOnFailureListener { e ->
+                //hide the progress dialog in case of an error
+                when(context) {
+                    is CartListActivity -> {
+                        context.hideProgressDialog()
+                    }
+            }
+                Log.e(context.javaClass.simpleName, "Error while updating the cart item.", e)
+            }
+    }
 }
