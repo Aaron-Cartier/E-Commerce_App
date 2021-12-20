@@ -15,8 +15,10 @@
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/drawable/ic_vector_edit.xml" value="0.290625" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/drawable/ic_vector_remove.xml" value="0.290625" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/drawable/item_dashboard_background.xml" value="0.290625" />
+        <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/drawable/item_primary_color_border_background.xml" value="0.290625" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/drawable/rv_item_image_background.xml" value="0.290625" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/activity_add_product.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/activity_address_list.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/activity_cart_list.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/activity_dashboard.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/activity_main.xml" value="0.16893115942028986" />
