@@ -13,6 +13,8 @@ import kotlinx.android.synthetic.main.activity_add_edit_address.*
 import kotlinx.android.synthetic.main.activity_address_list.*
 
 class AddEditAddressActivity : BaseActivity() {
+
+    private var mAddressDetails: Address? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_edit_address)
@@ -28,6 +30,10 @@ class AddEditAddressActivity : BaseActivity() {
             }else{
                 til_other_details.visibility = View.GONE
             }
+        }
+
+        if(intent.hasExtra(Constants.EXTRA_ADDRESS_DETAILS)) {
+            mAddressDetails = intent.getParcelableExtra(Constants.EXTRA_ADDRESS_DETAILS)
         }
     }
 

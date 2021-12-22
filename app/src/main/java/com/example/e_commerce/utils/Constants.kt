@@ -48,6 +48,7 @@ object Constants {
     const val OTHER: String = "Other"
 
     const val ADDRESSES: String = "addresses"
+    const val EXTRA_ADDRESS_DETAILS: String = "AddressDetails"
 
 
     fun showImageChooser(activity: Activity) {
