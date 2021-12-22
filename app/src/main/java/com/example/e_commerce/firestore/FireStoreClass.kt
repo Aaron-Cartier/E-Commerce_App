@@ -413,4 +413,25 @@ class FireStoreClass {
                 Log.e(activity.javaClass.simpleName, "Error while adding the address", e)
             }
     }
+
+    fun getAddressList(activity: AddressListActivity) {
+        mFireStore.collection(Constants.ADDRESSES)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserId())
+            .get()
+            .addOnSuccessListener { document ->
+                //here we get the list of boards in the form of documents
+                Log.e(activity.javaClass.simpleName, document.documents.toString())
+                //here we have created a new instance for address ArrayList.
+                val addressList: ArrayList<Address> = ArrayList()
+                for(i in document.documents) {
+                    val address = i.toObject(Address::class.java)!!
+                    address.id = i.id
+                    addressList.add(address)
+                }
+                activity.successAddressListFromFirestore(addressList)
+            }.addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(activity.javaClass.simpleName, "Error while getting the address.", e)
+            }
+    }
 }
