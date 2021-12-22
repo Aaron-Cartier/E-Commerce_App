@@ -24,6 +24,7 @@ class AddEditAddressActivity : BaseActivity() {
         rg_type.setOnCheckedChangeListener { _, checkedId ->
             if(checkedId == R.id.rb_other) {
                 til_other_details.visibility = View.VISIBLE
+                btn_submit_address.visibility = View.VISIBLE
             }else{
                 til_other_details.visibility = View.GONE
             }
@@ -123,7 +124,7 @@ class AddEditAddressActivity : BaseActivity() {
                 otherDetails
             )
 
-            FireStoreClass().addAddress(this, addressModel)
+            FireStoreClass().addAddress(this@AddEditAddressActivity, addressModel)
         }
     }
 
@@ -132,5 +133,6 @@ class AddEditAddressActivity : BaseActivity() {
 
         Toast.makeText(this@AddEditAddressActivity,
         resources.getString(R.string.err_your_address_added_successfully), Toast.LENGTH_SHORT).show()
+        finish()
     }
 }
