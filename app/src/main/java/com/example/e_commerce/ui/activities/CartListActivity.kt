@@ -1,5 +1,6 @@
 package com.example.e_commerce.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +11,7 @@ import com.example.e_commerce.firestore.FireStoreClass
 import com.example.e_commerce.models.CartItem
 import com.example.e_commerce.models.Product
 import com.example.e_commerce.ui.adapters.CartItemsListAdapter
+import com.example.e_commerce.utils.Constants
 import com.google.api.Distribution
 import kotlinx.android.synthetic.main.activity_cart_list.*
 
@@ -23,6 +25,12 @@ class CartListActivity : BaseActivity() {
         setContentView(R.layout.activity_cart_list)
 
         setupActionBar()
+
+        btn_checkout.setOnClickListener {
+            val intent = Intent(this@CartListActivity, AddressListActivity::class.java)
+            intent.putExtra(Constants.EXTRA_SELECT_ADDRESS, true)
+            startActivity(intent)
+        }
     }
 
     private fun setupActionBar() {

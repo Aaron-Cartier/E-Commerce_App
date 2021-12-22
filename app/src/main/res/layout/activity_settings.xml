@@ -159,7 +159,7 @@
             android:orientation="horizontal"
             android:padding="@dimen/settings_address_padding">
 
-            <TextView
+            <com.example.e_commerce.utils.TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/settings_lbl_addresses_margin"
