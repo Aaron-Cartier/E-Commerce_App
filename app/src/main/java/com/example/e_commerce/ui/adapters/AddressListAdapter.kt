@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerce.R
 import com.example.e_commerce.models.Address
 import com.example.e_commerce.ui.activities.AddEditAddressActivity
+import com.example.e_commerce.ui.activities.CheckoutActivity
 import com.example.e_commerce.utils.Constants
 import kotlinx.android.synthetic.main.item_address_layout.view.*
 
@@ -62,15 +63,15 @@ open class AddressListAdapter(
         val model = list[position]
 
         if (holder is MyViewHolder) {
-            holder.itemView.tv_address_full_name.setText(model.name)
-            holder.itemView.tv_address_type.setText(model.type)
-            holder.itemView.tv_address_details.setText("${model.address}, ${model.zipCode}")
-            holder.itemView.tv_address_mobile_number.setText(model.mobileNumber)
+            holder.itemView.tv_address_full_name.text = model.name
+            holder.itemView.tv_address_type.text = model.type
+            holder.itemView.tv_address_details.text = "${model.address}, ${model.zipCode}"
+            holder.itemView.tv_address_mobile_number.text = model.mobileNumber
 
             if(selectAddress) {
                 holder.itemView.setOnClickListener {
-                    Toast.makeText(context, "Selected address : ${model.address}, ${model.zipCode}", Toast.LENGTH_SHORT)
-                        .show()
+                    val intent = Intent(context, CheckoutActivity::class.java)
+                    context.startActivity(intent)
                 }
             }
         }
