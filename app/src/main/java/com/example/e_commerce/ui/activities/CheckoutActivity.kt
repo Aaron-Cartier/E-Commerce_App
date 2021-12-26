@@ -3,13 +3,35 @@ package com.example.e_commerce.ui.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.e_commerce.R
+import com.example.e_commerce.models.Address
+import com.example.e_commerce.utils.Constants
 import kotlinx.android.synthetic.main.activity_checkout.*
 
 class CheckoutActivity : AppCompatActivity() {
+
+    private var mAddressDetails: Address? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
         setupActionBar()
+
+        if(intent.hasExtra(Constants.EXTRA_SELECTED_ADDRESS)) {
+            mAddressDetails = intent.getParcelableExtra<Address>(Constants.EXTRA_SELECTED_ADDRESS)
+        }
+
+        if(mAddressDetails != null) {
+            tv_checkout_address_type.text = mAddressDetails?.type
+            tv_checkout_full_name.text = mAddressDetails?.name
+            tv_checkout_address.text = "${mAddressDetails!!.address}, ${mAddressDetails!!.zipCode}"
+            tv_checkout_additional_note.text = mAddressDetails?.additionalNote
+
+            if(mAddressDetails?.otherDetails!!.isNotEmpty()) {
+                tv_checkout_other_details.text = mAddressDetails?.otherDetails
+            }
+
+            tv_checkout_mobile_number.text = mAddressDetails?.mobileNumber
+        }
     }
 
     private fun setupActionBar() {
