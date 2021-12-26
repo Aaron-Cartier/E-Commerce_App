@@ -184,7 +184,7 @@ class FireStoreClass {
             }
     }
 
-    fun getAllProductsList(activity: CartListActivity) {
+    fun getAllProductsList(activity: Activity) {
         mFireStore.collection(Constants.PRODUCTS)
             .get()
             .addOnSuccessListener { document ->
@@ -198,9 +198,25 @@ class FireStoreClass {
                     productList.add(product)
                 }
 
-                activity.successProductsListFromFireStore(productList)
+                when(activity) {
+                    is CartListActivity -> {
+                        activity.successProductsListFromFireStore(productList)
+                    }
+
+                    is CheckoutActivity -> {
+                        activity.successProductsListFromFireStore(productList)
+                    }
+                }
             }.addOnFailureListener { e ->
-                activity.hideProgressDialog()
+                when(activity) {
+                    is CartListActivity -> {
+                        activity.hideProgressDialog()
+                    }
+
+                    is CheckoutActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                }
                 Log.e("Get product list", "Error while getting all of the product list", e)
             }
     }
@@ -347,11 +363,19 @@ class FireStoreClass {
                     is CartListActivity -> {
                         activity.successCartItemsList(list)
                     }
+
+                    is CheckoutActivity -> {
+                        activity.successCartItemsList(list)
+                    }
                 }
             }.addOnFailureListener { e ->
                 //hide the progress dialog if there is an error based on the activity instance
                 when(activity) {
                     is CartListActivity -> {
+                        activity.hideProgressDialog()
+                    }
+
+                    is CheckoutActivity -> {
                         activity.hideProgressDialog()
                     }
                 }
