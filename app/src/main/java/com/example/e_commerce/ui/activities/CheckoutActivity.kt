@@ -2,11 +2,13 @@ package com.example.e_commerce.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_commerce.R
 import com.example.e_commerce.firestore.FireStoreClass
 import com.example.e_commerce.models.Address
 import com.example.e_commerce.models.CartItem
 import com.example.e_commerce.models.Product
+import com.example.e_commerce.ui.adapters.CartItemsListAdapter
 import com.example.e_commerce.utils.Constants
 import kotlinx.android.synthetic.main.activity_checkout.*
 
@@ -72,6 +74,21 @@ class CheckoutActivity : BaseActivity() {
 
     fun successCartItemsList(cartList: ArrayList<CartItem>) {
         hideProgressDialog()
+
+        for(product in mProductList) {
+            for(cart in cartList) {
+                if(product.product_id == cart.product_id) {
+                    cart.stock_quantity = product.stock_quantity
+                }
+            }
+        }
+
         mCartItemsList = cartList
+
+        rv_cart_list_items.layoutManager = LinearLayoutManager(this@CheckoutActivity)
+        rv_cart_list_items.setHasFixedSize(true)
+
+        val cartListAdapter = CartItemsListAdapter(this@CheckoutActivity, mCartItemsList, false)
+        rv_cart_list_items.adapter = cartListAdapter
     }
 }
