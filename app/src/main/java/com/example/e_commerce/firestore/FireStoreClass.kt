@@ -7,10 +7,7 @@ import android.net.Uri
 import android.provider.Settings
 import android.util.Log
 import androidx.fragment.app.Fragment
-import com.example.e_commerce.models.Address
-import com.example.e_commerce.models.CartItem
-import com.example.e_commerce.models.Product
-import com.example.e_commerce.models.User
+import com.example.e_commerce.models.*
 import com.example.e_commerce.ui.activities.*
 import com.example.e_commerce.ui.fragments.DashboardFragment
 import com.example.e_commerce.ui.fragments.ProductsFragment
@@ -474,7 +471,6 @@ class FireStoreClass {
     }
 
     fun deleteAddress(activity: AddressListActivity, addressId: String) {
-
         mFireStore.collection(Constants.ADDRESSES)
             .document(addressId)
             .delete()
@@ -489,6 +485,18 @@ class FireStoreClass {
                     "Error while deleting the address.",
                     e
                 )
+            }
+    }
+
+    fun placeOrder(activity: CheckoutActivity, order: Order) {
+        mFireStore.collection(Constants.ORDERS)
+            .document()
+            .set(order, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.orderPlacedSuccess()
+            }.addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(activity.javaClass.simpleName, "Error while place an order", e)
             }
     }
 }
