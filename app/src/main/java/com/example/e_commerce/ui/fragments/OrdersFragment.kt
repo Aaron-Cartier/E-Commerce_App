@@ -6,38 +6,64 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.e_commerce.R
 import com.example.e_commerce.databinding.FragmentOrdersBinding
+import com.example.e_commerce.firestore.FireStoreClass
+import com.example.e_commerce.models.Order
+import com.example.e_commerce.ui.adapters.MyOrdersListAdapter
+import kotlinx.android.synthetic.main.fragment_orders.*
 
 
-class OrdersFragment : Fragment() {
-
-    //private lateinit var notificationsViewModel: NotificationsViewModel
-    private var _binding: FragmentOrdersBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
+class OrdersFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        notificationsViewModel =
-//            ViewModelProvider(this).get(NotificationsViewModel::class.java)
-
-        _binding = FragmentOrdersBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textNotifications
-        //.text.observe(viewLifecycleOwner, Observer {
-        textView.text = "This is the orders fragment."
+        val root = inflater.inflate(R.layout.fragment_orders, container, false)
 
         return root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onResume() {
+        super.onResume()
+
+        getMyOrdersList()
+    }
+
+    /**
+     * A function to get the list of my orders.
+     */
+    private fun getMyOrdersList() {
+        // Show the progress dialog.
+        showProgressDialog(resources.getString(R.string.please_wait))
+
+        FireStoreClass().getMyOrdersList(this@OrdersFragment)
+    }
+
+    /**
+     * A function to get the success result of the my order list from cloud firestore.
+     *
+     * @param ordersList List of my orders.
+     */
+    fun populateOrdersListUI(ordersList: ArrayList<Order>) {
+        // Hide the progress dialog.
+        hideProgressDialog()
+
+        if (ordersList.size > 0) {
+
+            rv_my_order_items.visibility = View.VISIBLE
+            tv_no_orders_found.visibility = View.GONE
+
+            rv_my_order_items.layoutManager = LinearLayoutManager(activity)
+            rv_my_order_items.setHasFixedSize(true)
+
+            val myOrdersAdapter = MyOrdersListAdapter(requireActivity(), ordersList)
+            rv_my_order_items.adapter = myOrdersAdapter
+        } else {
+            rv_my_order_items.visibility = View.GONE
+            tv_no_orders_found.visibility = View.VISIBLE
+        }
     }
 }

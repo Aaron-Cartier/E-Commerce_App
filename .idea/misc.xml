@@ -32,11 +32,12 @@
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/activity_user_profile.xml" value="0.17391304347826086" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/fragment_base.xml" value="0.2694746376811594" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/fragment_dashboard.xml" value="0.26222826086956524" />
+        <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/fragment_orders.xml" value="0.2509057971014493" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/fragment_products.xml" value="0.27309782608695654" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/item_address_layout.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/item_cart_layout.xml" value="0.2726449275362319" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/item_dashboard_layout.xml" value="0.27447916666666666" />
-        <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/item_list_layout.xml" value="0.2658514492753623" />
+        <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/layout/item_list_layout.xml" value="0.2" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/menu/add_product_menu.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/menu/bottom_nav_menu.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/Aaron/AndroidStudioProjects/ECommerce/app/src/main/res/menu/dashboard_menu.xml" value="0.27447916666666666" />

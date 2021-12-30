@@ -2,24 +2,21 @@ package com.example.e_commerce.ui.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerce.R
-import com.example.e_commerce.models.Product
-import com.example.e_commerce.ui.activities.ProductDetailsActivity
-import com.example.e_commerce.utils.Constants
+import com.example.e_commerce.models.Order
 import com.example.e_commerce.utils.GlideLoader
-import kotlinx.android.synthetic.main.item_dashboard_layout.view.*
+import kotlinx.android.synthetic.main.item_list_layout.view.*
 
-open class DashboardItemsListAdapter(
+open class MyOrdersListAdapter(
     private val context: Context,
-    private var list: ArrayList<Product>
+    private var list: ArrayList<Order>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var onClickListener: OnClickListener? = null
+
     /**
      * Inflates the item views which is designed in xml layout file
      *
@@ -29,15 +26,11 @@ open class DashboardItemsListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return MyViewHolder(
             LayoutInflater.from(context).inflate(
-                R.layout.item_dashboard_layout,
+                R.layout.item_list_layout,
                 parent,
                 false
             )
         )
-    }
-
-    fun setOnClickListener(onClickListener: OnClickListener) {
-        this.onClickListener = onClickListener
     }
 
     /**
@@ -50,35 +43,18 @@ open class DashboardItemsListAdapter(
      * of the given type. You can either create a new View manually or inflate it from an XML
      * layout file.
      */
-    @SuppressLint("SetTextI18n")
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model = list[position]
 
         if (holder is MyViewHolder) {
 
-            GlideLoader(context).loadProductPicture(
-                model.image,
-                holder.itemView.iv_dashboard_item_image
-            )
-            holder.itemView.tv_dashboard_item_title.text = model.title
-            holder.itemView.tv_dashboard_item_price.text = "$${model.price}"
+            GlideLoader(context).loadProductPicture(model.image, holder.itemView.iv_item_image)
 
-            holder.itemView.setOnClickListener{
-                val intent = Intent(context, ProductDetailsActivity::class.java)
-                intent.putExtra(Constants.EXTRA_PRODUCT_ID, model.product_id)
-                intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, model.user_id)
-                context.startActivity(intent)
-            }
+            holder.itemView.tv_item_name.text = model.title
+            holder.itemView.tv_item_price.text = "$${model.shipping_charge}"
 
-            /**
-            - second way of implementing on click for dashboard product
-
-            holder.itemView.setOnClickListener {
-                if(onClickListener != null) {
-                   onClickListener!!.onClick(position, model)
-                }
-            }
-             **/
+            holder.itemView.ib_delete_product.visibility = View.GONE
         }
     }
 
@@ -93,8 +69,4 @@ open class DashboardItemsListAdapter(
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
      */
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
-
-    interface OnClickListener{
-        fun onClick(position: Int, product: Product)
-    }
 }

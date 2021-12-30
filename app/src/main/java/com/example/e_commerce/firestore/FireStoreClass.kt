@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.example.e_commerce.models.*
 import com.example.e_commerce.ui.activities.*
 import com.example.e_commerce.ui.fragments.DashboardFragment
+import com.example.e_commerce.ui.fragments.OrdersFragment
 import com.example.e_commerce.ui.fragments.ProductsFragment
 import com.example.e_commerce.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
@@ -535,5 +536,25 @@ class FireStoreClass {
 
             Log.e(activity.javaClass.simpleName, "Error while updating all the details after order placed.", e)
         }
+    }
+
+    fun getMyOrdersList(fragment: OrdersFragment) {
+        mFireStore.collection(Constants.ORDERS)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserId())
+            .get()
+            .addOnSuccessListener { document ->
+                val list: ArrayList<Order> = ArrayList()
+
+                for(i in document.documents) {
+                    val orderItem = i.toObject(Order::class.java)!!
+                    orderItem.id = i.id
+
+                    list.add(orderItem)
+                }
+                fragment.populateOrdersListUI(list)
+            }.addOnFailureListener { e ->
+                fragment.hideProgressDialog()
+                Log.e(fragment.javaClass.simpleName, "Error while loading the orders list.", e)
+            }
     }
 }
