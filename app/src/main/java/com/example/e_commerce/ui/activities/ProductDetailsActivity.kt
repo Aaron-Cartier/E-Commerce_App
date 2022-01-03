@@ -20,6 +20,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 
     private var mProductId: String = ""
     private lateinit var mProductDetails: Product
+    private var mProductOwnerId: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,13 +32,13 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
             mProductId = intent.getStringExtra(Constants.EXTRA_PRODUCT_ID)!!
         }
 
-        var productOwnerId: String = ""
+        //var productOwnerId: String = ""
 
         if(intent.hasExtra(Constants.EXTRA_PRODUCT_OWNER_ID)) {
-            productOwnerId = intent.getStringExtra(Constants.EXTRA_PRODUCT_OWNER_ID)!!
+            mProductOwnerId = intent.getStringExtra(Constants.EXTRA_PRODUCT_OWNER_ID)!!
         }
 
-        if(FireStoreClass().getCurrentUserId() == productOwnerId){
+        if(FireStoreClass().getCurrentUserId() == mProductOwnerId){
             btn_add_to_cart.visibility = View.GONE
             btn_cart.visibility = View.GONE
         }else{
@@ -72,15 +73,15 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
             product.image,
             iv_product_detail_image
         )
-        tv_product_details_title.setText(product.title)
-        tv_product_details_price.setText("${product.price}")
-        tv_product_details_description.setText(product.description)
-        tv_product_details_stock_quantity.setText(product.stock_quantity)
+        tv_product_details_title.text = product.title
+        tv_product_details_price.text = "${product.price}"
+        tv_product_details_description.text = product.description
+        tv_product_details_stock_quantity.text = product.stock_quantity
 
         if(product.stock_quantity.toInt() == 0) {
             hideProgressDialog()
             btn_add_to_cart.visibility = View.GONE
-            tv_product_details_stock_quantity.setText(resources.getString(R.string.lbl_out_of_stock))
+            tv_product_details_stock_quantity.text = resources.getString(R.string.lbl_out_of_stock)
             tv_product_details_stock_quantity.setTextColor(ContextCompat.getColor(this@ProductDetailsActivity, R.color.colorSnackBarError))
         }else{
             if(FireStoreClass().getCurrentUserId() == product.user_id) {
@@ -100,6 +101,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
     private fun addToCart() {
         val cartItem = CartItem(
             FireStoreClass().getCurrentUserId(),
+            mProductOwnerId,
             mProductId,
             mProductDetails.title,
             mProductDetails.price,

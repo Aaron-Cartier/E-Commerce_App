@@ -33,6 +33,9 @@ class CheckoutActivity : BaseActivity() {
     // A global variable for the Total Amount.
     private var mTotalAmount: Double = 0.0
 
+    //a global variable for SoldProduct model class
+    private lateinit var mOrderDetails: Order
+
     /**
      * This function is auto created by Android when the Activity Class is created.
      */
@@ -169,32 +172,33 @@ class CheckoutActivity : BaseActivity() {
         // Show the progress dialog.
         showProgressDialog(resources.getString(R.string.please_wait))
 
-        val order = Order(
-            FireStoreClass().getCurrentUserId(),
-            mCartItemsList,
-            mAddressDetails!!,
-            "My order ${System.currentTimeMillis()}",
-            mCartItemsList[0].image,
-            mSubTotal.toString(),
-            "10.0", // The Shipping Charge is fixed as $10 for now in our case.
-            mTotalAmount.toString(),
-            System.currentTimeMillis()
-        )
-        FireStoreClass().placeOrder(this@CheckoutActivity, order)
+        if(mAddressDetails != null) {
+            mOrderDetails = Order(
+                FireStoreClass().getCurrentUserId(),
+                mCartItemsList,
+                mAddressDetails!!,
+                "My order ${System.currentTimeMillis()}",
+                mCartItemsList[0].image,
+                mSubTotal.toString(),
+                "10.0", // The Shipping Charge is fixed as $10 for now in our case.
+                mTotalAmount.toString(),
+                System.currentTimeMillis()
+            )
+            FireStoreClass().placeOrder(this@CheckoutActivity, mOrderDetails)
+        }
     }
 
     /**
      * A function to notify the success result of the order placed.
      */
     fun orderPlacedSuccess() {
-        FireStoreClass().updateAllDetails(this@CheckoutActivity, mCartItemsList)
+        FireStoreClass().updateAllDetails(this@CheckoutActivity, mCartItemsList, mOrderDetails)
     }
 
     /**
      * A function to notify the success result after updating all the required details.
      */
     fun allDetailsUpdatedSuccessfully() {
-
         // Hide the progress dialog.
         hideProgressDialog()
 
