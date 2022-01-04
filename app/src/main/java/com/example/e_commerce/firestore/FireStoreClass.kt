@@ -12,6 +12,7 @@ import com.example.e_commerce.ui.activities.*
 import com.example.e_commerce.ui.fragments.DashboardFragment
 import com.example.e_commerce.ui.fragments.OrdersFragment
 import com.example.e_commerce.ui.fragments.ProductsFragment
+import com.example.e_commerce.ui.fragments.SoldProductFragment
 import com.example.e_commerce.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -569,6 +570,25 @@ class FireStoreClass {
             }.addOnFailureListener { e ->
                 fragment.hideProgressDialog()
                 Log.e(fragment.javaClass.simpleName, "Error while loading the orders list.", e)
+            }
+    }
+
+    fun getSoldProductsList(fragment: SoldProductFragment) {
+        mFireStore.collection(Constants.SOLD_PRODUCTS)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserId())
+            .get()
+            .addOnSuccessListener { document ->
+                val list: ArrayList<SoldProduct> = ArrayList()
+                for(i in document.documents) {
+                    val soldProduct = i.toObject(SoldProduct::class.java)!!
+                    soldProduct.id = i.id
+                    list.add(soldProduct)
+                }
+                fragment.successSoldProductsList(list)
+            }.addOnFailureListener { e ->
+                //hide the progress dialog if there is an error
+                fragment.hideProgressDialog()
+                Log.e(fragment.javaClass.simpleName, "Error while getting the lost of sold products", e)
             }
     }
 }
