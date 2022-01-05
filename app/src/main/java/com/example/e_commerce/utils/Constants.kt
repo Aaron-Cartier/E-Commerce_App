@@ -61,6 +61,7 @@ object Constants {
 
     const val SOLD_PRODUCTS: String = "sold_product"
 
+    const val EXTRA_SOLD_PRODUCT_DETAILS: String = "extra_sold_product_details"
 
     fun showImageChooser(activity: Activity) {
         //an intent for launching the image selection of phone storage
