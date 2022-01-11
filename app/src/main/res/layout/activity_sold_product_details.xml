@@ -80,7 +80,7 @@
                         android:textSize="@dimen/sold_details_label_value_textSize" />
 
                     <com.example.e_commerce.utils.TextView
-                        android:id="@+id/tv_order_details_id"
+                        android:id="@+id/tv_sold_product_details_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
@@ -103,7 +103,7 @@
                         android:textSize="@dimen/sold_details_label_value_textSize" />
 
                     <com.example.e_commerce.utils.TextView
-                        android:id="@+id/tv_order_details_date"
+                        android:id="@+id/tv_sold_product_details_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
@@ -136,7 +136,8 @@
                 android:paddingStart="@dimen/sold_details_content_paddingStartEnd"
                 android:paddingTop="@dimen/sold_details_content_paddingTopBottom"
                 android:paddingEnd="@dimen/sold_details_content_paddingStartEnd"
-                android:paddingBottom="@dimen/sold_details_content_paddingTopBottom">
+                android:paddingBottom="@dimen/sold_details_content_paddingTopBottom"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -179,6 +180,20 @@
                         android:textStyle="bold"
                         tools:text="$100.00" />
                 </LinearLayout>
+
+                <com.example.e_commerce.utils.TextView
+                    android:id="@+id/tv_sold_product_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/item_grey_border_background"
+                    android:paddingStart="@dimen/cart_quantity_paddingStartEnd"
+                    android:paddingTop="@dimen/cart_quantity_paddingTopBottom"
+                    android:paddingEnd="@dimen/cart_quantity_paddingStartEnd"
+                    android:paddingBottom="@dimen/cart_quantity_paddingTopBottom"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/cart_quantity_textSize"
+                    android:textStyle="bold"
+                    tools:text="1" />
             </LinearLayout>
 
 
@@ -222,7 +237,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/item_value_text_color"
                     android:textSize="@dimen/item_address_name_textSize"
-                    tools:text="Denis Panjuta" />
+                    tools:text="John Doe" />
 
                 <com.example.e_commerce.utils.TextView
                     android:id="@+id/tv_sold_details_address"
@@ -231,7 +246,7 @@
                     android:layout_marginTop="@dimen/address_details_marginTop"
                     android:textColor="@color/item_value_text_color"
                     android:textSize="@dimen/address_details_textSize"
-                    tools:text="XYZ" />
+                    tools:text="abc" />
 
                 <com.example.e_commerce.utils.TextView
                     android:id="@+id/tv_sold_details_additional_note"
@@ -240,7 +255,7 @@
                     android:layout_marginTop="@dimen/address_details_marginTop"
                     android:textColor="@color/item_value_text_color"
                     android:textSize="@dimen/address_details_textSize"
-                    tools:text="XYZ" />
+                    tools:text="abc" />
 
                 <com.example.e_commerce.utils.TextView
                     android:id="@+id/tv_sold_details_other_details"
@@ -249,7 +264,7 @@
                     android:layout_marginTop="@dimen/address_details_marginTop"
                     android:textColor="@color/item_value_text_color"
                     android:textSize="@dimen/address_details_textSize"
-                    tools:text="XYZ" />
+                    tools:text="abc" />
 
                 <com.example.e_commerce.utils.TextView
                     android:id="@+id/tv_sold_details_mobile_number"
@@ -258,7 +273,7 @@
                     android:layout_marginTop="@dimen/address_details_marginTop"
                     android:textColor="@color/item_value_text_color"
                     android:textSize="@dimen/address_details_textSize"
-                    tools:text="+64 123456789" />
+                    tools:text="1234567890" />
             </LinearLayout>
 
             <com.example.e_commerce.utils.TextView
@@ -352,5 +367,6 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
